@@ -19,6 +19,18 @@ app.get('/users', async (req, res) => {
     res.json(users)
 })
 
+app.post('/users', async (req, res) => {
+    const { name } = req.body
+
+    const newUser = await prisma.user.create({
+        data: {
+            name
+        }
+    })
+
+    res.json(newUser)
+})
+
 app.listen(3000, () => {
     console.log('Servidor rodando em http://localhost:3000')
 })
