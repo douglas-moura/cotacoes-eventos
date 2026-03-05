@@ -7,3 +7,7 @@
 .container-login {
     @apply !w-[820px] grid-cols-2 bg-white;
 }
+
+.coluna-formulario {
+    @apply p-12 justify-between;
+}

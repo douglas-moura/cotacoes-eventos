@@ -1,20 +1,32 @@
 @import "tailwindcss";
 
 .input-container {
-  @apply mb-4 relative;
+  @apply mb-6 relative;
 }
 
 .input-container label {
-  @apply text-sm h-8;
+  @apply text-sm h-6 font-semibold;
+}
+
+.icone-aux {
+  @apply absolute right-4 mt-10 z-100 cursor-pointer;
+}
+
+.input-container select {
+  /* Remove a seta no Chrome, Safari, Edge e versões novas do Firefox */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  /* Opcional: Remove a seta no Internet Explorer */
+  &::-ms-expand {
+    display: none;
+  }
 }
 
 .input-default {
-  @apply border p-4 rounded text-sm;
+  @apply border p-4 rounded text-sm bg-white;
   border-color: var(--color-cinza-2);
-}
-
-#icone-ver-senha {
-  @apply absolute right-4 mt-12 z-100 cursor-pointer;
 }
 
 #password-assets {

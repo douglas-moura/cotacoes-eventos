@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.aceitar-lgpd {
+  @apply flex flex-row items-center text-gray-500 items-center text-xs my-4;
+}

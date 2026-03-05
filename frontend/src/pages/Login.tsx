@@ -8,10 +8,8 @@ export default function Login(): React.JSX.Element {
         <main className="pagina">
             <section className='sessao-login'>
                 <div className="container container-login">
-                    <div className='coluna p-12 align-center justify-between'>
-                        <h1 className="text-2xl font-bold mb-4">
-                            Login
-                        </h1>
+                    <div className='coluna coluna-formulario'>
+                        <h2>Login</h2>
                         <LoginForm />
                         <p className='w-full text-center mt-8 text-sm'>Não tem uma conta? <a className='link' href="/cadastro">Cadastre-se aqui.</a></p>
                     </div>

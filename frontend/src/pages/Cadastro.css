@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.coluna-cadastro-form {
+    @apply bg-white p-12;
+}
