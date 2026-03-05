@@ -1,9 +1,40 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #86B434;
+  --color-secondary: #6234b4;
+  --color-cinza-1: #F2F2F2;
+  --color-cinza-2: #E0E0E0;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html, body, #root {
   height: 100%;
+}
+
+main, section, span {
+  @apply flex flex-col;
+}
+
+main {
+  @apply p-4 h-full bg-cinza-1;
+}
+
+section {
+  @apply w-full;
+}
+
+.container {
+  @apply grid gap-4 w-[1080px] mx-auto;
+}
+
+.coluna {
+  @apply flex flex-col;
+}
+
+.link {
+  @apply text-primary hover:underline cursor-pointer;
 }

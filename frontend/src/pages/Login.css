@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.sessao-login {
+    @apply h-full justify-center items-center;
+}
+
+.container-login {
+    @apply !w-[820px] grid-cols-2 bg-white;
+}

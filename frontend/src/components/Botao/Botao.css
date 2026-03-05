@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+.botao {
+    @apply w-full font-medium text-white p-4;
+}
+
+.botao-default {
+    background-color: var(--color-cinza-2);
+}
+
+.botao-primario {
+    @apply hover:bg-gray-700;
+    background-color: var(--color-primary);
+}
+
+.botao-secundario {
+    background-color: var(--color-secondary);
+}
+
+.botao-block {
+    background-color: var(--color-cinza-2);
+}

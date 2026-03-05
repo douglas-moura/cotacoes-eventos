@@ -1,7 +1,8 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { User } from '../types/interface'
 
-export default function Home() {
+export default function Home(): React.JSX.Element {
     const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
