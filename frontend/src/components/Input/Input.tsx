@@ -2,20 +2,20 @@ import React from 'react'
 import { Icon } from '@iconify/react'
 import './Input.css'
 
-export default function Input({InputType, inputLabel, placeholder, opcoes}: {InputType: string, inputLabel?: string, placeholder?: string, opcoes?: string[]}): React.JSX.Element {
+export default function Input({InputType, inputLabel, placeholder, opcoes, value, onChange}: {InputType: string, inputLabel?: string, placeholder?: string, opcoes?: string[], value?: string, onChange?: (value: string) => void}): React.JSX.Element {
     switch (InputType) {
         case 'text':
             return (
                 <span className='input-container'>
                     <label htmlFor="text">{inputLabel}</label>
-                    <input type="text" placeholder={placeholder} className="input-default" />
+                    <input type="text" placeholder={placeholder} className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
                 </span>
             )
         case 'email':
             return (
                 <span className='input-container'>
                     <label htmlFor="email">{inputLabel}</label>
-                    <input type="email" placeholder="exemplo@email.com.br" className="input-default" />
+                    <input type="email" placeholder="exemplo@email.com.br" className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
                 </span>
             )
         case 'password-login':
@@ -23,7 +23,7 @@ export default function Input({InputType, inputLabel, placeholder, opcoes}: {Inp
                 <span className='input-container'>
                     <label htmlFor="password">{inputLabel}</label>
                     <Icon icon="mdi:eye" width="20" className='icone-aux' />
-                    <input type="password" placeholder={placeholder} className="input-default" />
+                    <input type="password" placeholder={placeholder} className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
                     <div id='password-assets' className='text-xs my-2'>
                         <div className="text-gray-500 items-center flex">
                             <input type="checkbox" id="lembrar-password" className="mr-2" />
@@ -40,7 +40,7 @@ export default function Input({InputType, inputLabel, placeholder, opcoes}: {Inp
                 <span className='input-container'>
                     <label htmlFor="password">{inputLabel}</label>
                     <Icon icon="mdi:eye" width="20" className='icone-aux' />
-                    <input type="password" placeholder={placeholder} className="input-default" />
+                    <input type="password" placeholder={placeholder} className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
                 </span>
             )
         case 'lista':

@@ -1,7 +1,7 @@
 import React from "react"
 import './Botao.css'
 
-export default function Botao({ texto, tipo }: { texto: string, tipo?: string }): React.JSX.Element {
+export default function Botao({ texto, tipo, onClick }: { texto: string, tipo?: string, onClick?: () => void }): React.JSX.Element {
     let tipoBotao = tipo || "botao-default"
     
     switch (tipo) {
@@ -18,7 +18,7 @@ export default function Botao({ texto, tipo }: { texto: string, tipo?: string })
             tipoBotao = "botao-default"
     }
     return (
-        <button type="button" className={[tipoBotao, "botao"].join(' ')}>
+        <button type="button" onClick={onClick} className={[tipoBotao, "botao"].join(' ')}>
             {texto}
         </button>
     )
