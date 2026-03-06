@@ -16,8 +16,8 @@ export default function Home(): React.JSX.Element {
             <h1 className="text-2xl font-bold mb-4">
                 Home
             </h1>
-            {users.map(user => (
-                <div key={user.id}>
+            {users.map((user, index) => (
+                <div key={index}>
                     {user.email}
                 </div>
             ))}

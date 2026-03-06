@@ -93,7 +93,7 @@ export default function CadastroForm(): React.JSX.Element {
             </div>
             <div className="aceitar-lgpd">
                 <input type="checkbox" className="mr-2" onChange={(e) => setAutorizado(e.target.checked)} />
-                Aceito os termos da LGPD
+                <p>Li e aceito os <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="link">Termos de Uso</a> e a <a href="/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="link">Política de Privacidade</a></p>
             </div>
             <Botao texto="Cadastrar" tipo='primario' />
         </form>
