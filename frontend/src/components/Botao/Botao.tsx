@@ -18,7 +18,7 @@ export default function Botao({ texto, tipo, onClick }: { texto: string, tipo?: 
             tipoBotao = "botao-default"
     }
     return (
-        <button type="button" onClick={onClick} className={[tipoBotao, "botao"].join(' ')}>
+        <button type="submit" onClick={onClick} className={[tipoBotao, "botao"].join(' ')}>
             {texto}
         </button>
     )

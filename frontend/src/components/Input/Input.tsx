@@ -1,21 +1,24 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
+import { InputProps } from '../../types/interface'
 import './Input.css'
 
-export default function Input({InputType, inputLabel, placeholder, opcoes, value, onChange}: {InputType: string, inputLabel?: string, placeholder?: string, opcoes?: string[], value?: string, onChange?: (value: string) => void}): React.JSX.Element {
+export default function Input({InputType, inputLabel, placeholder, opcoes, value, status, onChange}: InputProps): React.JSX.Element {
     switch (InputType) {
         case 'text':
             return (
                 <span className='input-container'>
                     <label htmlFor="text">{inputLabel}</label>
-                    <input type="text" placeholder={placeholder} className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    <input type="text" placeholder={placeholder} className={`input-default ${status === true ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    {status == true && <p className='text-[.5rem] mt-1 text-red-500'>Este campo é obrigatório</p>}
                 </span>
             )
         case 'email':
             return (
                 <span className='input-container'>
                     <label htmlFor="email">{inputLabel}</label>
-                    <input type="email" placeholder="exemplo@email.com.br" className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    <input type="email" placeholder="exemplo@email.com.br" className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>E-mail inválido</p>}
                 </span>
             )
         case 'password-login':
@@ -23,7 +26,7 @@ export default function Input({InputType, inputLabel, placeholder, opcoes, value
                 <span className='input-container'>
                     <label htmlFor="password">{inputLabel}</label>
                     <Icon icon="mdi:eye" width="20" className='icone-aux' />
-                    <input type="password" placeholder={placeholder} className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    <input type="password" placeholder={placeholder} className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
                     <div id='password-assets' className='text-xs my-2'>
                         <div className="text-gray-500 items-center flex">
                             <input type="checkbox" id="lembrar-password" className="mr-2" />
@@ -40,7 +43,8 @@ export default function Input({InputType, inputLabel, placeholder, opcoes, value
                 <span className='input-container'>
                     <label htmlFor="password">{inputLabel}</label>
                     <Icon icon="mdi:eye" width="20" className='icone-aux' />
-                    <input type="password" placeholder={placeholder} className="input-default" value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    <input type="password" placeholder={placeholder} className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>{inputLabel == 'Senha' ? 'A senha deve conter pelo menos 8 caracteres, incluindo uma letra e um número' : 'As senhas precisam ser iguais'}</p>}
                 </span>
             )
         case 'lista':

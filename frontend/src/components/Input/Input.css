@@ -25,8 +25,12 @@
 }
 
 .input-default {
-  @apply border p-4 rounded text-sm bg-white;
+  @apply border p-4 rounded text-sm bg-white outline-none;
   border-color: var(--color-cinza-2);
+}
+
+.input-alert {
+  @apply !border-red-500;
 }
 
 #password-assets {
