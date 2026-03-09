@@ -4,7 +4,7 @@ import Botao from '../Botao/Botao'
 import { useState, useEffect } from 'react'
 import { User } from '../../types/interface'
 import './CadastroForm.css'
-import validarCamposInputs from '../../functions/validarCamposInputs'
+import validarCamposInputs from '../../functions/validate'
 
 export default function CadastroForm(): React.JSX.Element {
     const [formData, setFormData] = useState<User>({

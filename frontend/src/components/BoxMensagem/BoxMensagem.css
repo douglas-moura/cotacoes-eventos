@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.box-mensagem-container {
+    @apply flex flex-row items-center border-0 p-4 mb-4 rounded-lg;
+}
+
+.box-mensagem-container p {
+    @apply text-xs;
+}
+
+.box-mensagem-icon {
+    @apply mr-2;
+}
+
+.box-mensagem-alerta {
+    @apply bg-[#FEF3AE] border-[#AB9402] text-[#AB9402];
+}
+
+.box-mensagem-erro {
+    @apply bg-[#FFC2C2] border-[#C20000] text-[#C20000];
+}
+
+.box-mensagem-sucesso {
+    @apply bg-[#C7FF99] border-[#459900] text-[#459900];
+}
