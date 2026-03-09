@@ -18,9 +18,22 @@ model User {
     nome        String      @map("name")
     email       String      @unique
     senha       String
-    data_nasc   DateTime?   @default(now())
+    data_nasc   DateTime?
     createdAt   DateTime    @default(now())
     ativo       Boolean     @default(true) @map("isActive")
 
+    acessos Acessos[]
+
     @@map("users")
+}
+
+model Acessos {
+    id              Int         @id @default(autoincrement())
+    user_id         Int
+    dispositivo     String
+    data_login      DateTime
+
+    fk_usuario User @relation(fields: [user_id], references: [id])
+
+    @@map("acessos")
 }

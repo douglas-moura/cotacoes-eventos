@@ -1,7 +1,6 @@
 export interface User {
     nome: string;
     email: string;
-    idade: number;
     senha: string;
 }
 
@@ -13,4 +12,10 @@ export interface InputProps {
     value?: string,
     status?: boolean,
     onChange?: (value: string) => void
+}
+
+export interface NovoAcesso {
+    user_id: number,
+    dispositivo: string,
+    data_login: Date,
 }

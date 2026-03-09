@@ -25,12 +25,25 @@ app.get('/users', async (req, res) => {
 })
 
 app.post('/users', async (req, res) => {
-
     const newUser = await prisma.user.create({
         data: req.body
     })
 
     res.json(newUser)
+})
+
+// rotas GET e POST para requisições de acessos
+app.get('/acessos', async (req, res) => {
+    const acessos = await prisma.acessos.findMany()
+    res.json(acessos)
+})
+
+app.post('/acessos', async (req, res) => {
+    const novoAcesso = await prisma.acessos.create({
+        data: req.body
+    })
+
+    res.json(novoAcesso)
 })
 
 // define que o backend esta "escutando" todas as requisições que chegam na porta 3000, ou seja, o backend só vai responder as requisições que chegarem nessa porta

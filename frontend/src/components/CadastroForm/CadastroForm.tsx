@@ -10,7 +10,7 @@ import BoxMensagem from '../BoxMensagem/BoxMensagem'
 import './CadastroForm.css'
 
 export default function CadastroForm(): React.JSX.Element {
-    const [formData, setFormData] = useState<User>({nome: '', email: '', idade: 0, senha: ''})
+    const [formData, setFormData] = useState<User>({nome: '', email: '', senha: ''})
     const [emailValido, setEmailValido] = useState<boolean>(false)
     const [senhaValida, setSenhaValida] = useState<boolean>(false)
     const [campoConfirmSenha, setCampoConfirmSenha] = useState<string>('')
@@ -29,7 +29,7 @@ export default function CadastroForm(): React.JSX.Element {
 
     const cadastrar = async () => {
         if (emailValido && senhaValida && autorizadoLGPD && formData.nome.length > 0 && campoConfirmSenha == formData.senha) {
-            if(await checarCredenciais({ action: 'cadastro', email: formData.email }) == false) {
+            if(await checarCredenciais({ action: 'cadastro', email: formData.email }) == 0) {
                 await cadastrarUser({dadosFormulario: formData})
                 setStatusCadastro(true)
                 setMsgBox('Cadastro realizado com sucesso!')
@@ -37,15 +37,15 @@ export default function CadastroForm(): React.JSX.Element {
                     navigate("/login")
                 }, 2000)
             } else {
-                setPrimeiraTentativa(true)
                 setStatusCadastro(false)
                 setMsgBox('E-mail já cadastrado')
             }
+            setPrimeiraTentativa(true)
         } else {
             // será pop-up futuramente
-            setPrimeiraTentativa(true)
             if (formData.email.length == 0) setEmailValido(true)
             if (formData.senha != campoConfirmSenha) setSenhaValida(true)
+            setPrimeiraTentativa(true)
         }
     }
 

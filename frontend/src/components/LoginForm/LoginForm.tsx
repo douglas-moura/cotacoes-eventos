@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { redirect, useNavigate  } from 'react-router'
+import React, { useState } from 'react'
+import { useNavigate  } from 'react-router'
 import { checarCredenciais } from '../../functions/checarCredenciais'
+import { registrarAcesso } from '../../functions/registrarAcesso'
+import { NovoAcesso } from '../../types/interface'
 import BoxMensagem from '../BoxMensagem/BoxMensagem'
 import Input from '../Input/Input'
 import Botao from '../Botao/Botao'
@@ -12,10 +14,17 @@ export default function LoginForm(): React.JSX.Element {
     const [statusLogin, setStatusLogin] = useState<boolean>(true)
     let navigate = useNavigate()
 
-    const logar = async (checagem: Promise<boolean>) => {
-        if (await checagem) {
+    const logar = async (checagem: Promise<number>) => {
+        if (await checagem != 0) {
+            const login_infos: NovoAcesso = {
+                user_id: await checagem,
+                dispositivo: navigator.userAgent,
+                data_login: new Date()
+            }            
+
             setStatusLogin(true)
             setTimeout(() => {
+                registrarAcesso(login_infos)
                 setEmail('')
                 setSenha('')
                 navigate("/")
