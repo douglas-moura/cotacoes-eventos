@@ -16,6 +16,8 @@ export default function LoginForm(): React.JSX.Element {
         if (await checagem) {
             setStatusLogin(true)
             setTimeout(() => {
+                setEmail('')
+                setSenha('')
                 navigate("/")
             }, 1000)
         } else {
@@ -26,9 +28,7 @@ export default function LoginForm(): React.JSX.Element {
     return (
         <form id='login-form' className='w-full' onSubmit={(e) => {
             e.preventDefault()
-            setEmail('')
-            setSenha('')
-            logar(checarCredenciais({ email, senha }))
+            logar(checarCredenciais({ action: 'login', email: email, senha: senha }))
         }}>
             { !statusLogin && email.length == 0 ? <BoxMensagem tipo="erro" msg="E-mail ou senha incorretos." /> : null }
             <Input

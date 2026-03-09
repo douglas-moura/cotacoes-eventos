@@ -1,52 +1,48 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router'
+import { cadastrarUser } from '../../functions/cadastrarUser'
+import { checarCredenciais } from '../../functions/checarCredenciais'
+import { User } from '../../types/interface'
 import Input from '../Input/Input'
 import Botao from '../Botao/Botao'
-import { useState, useEffect } from 'react'
-import { User } from '../../types/interface'
-import './CadastroForm.css'
 import validarCamposInputs from '../../functions/validate'
+import BoxMensagem from '../BoxMensagem/BoxMensagem'
+import './CadastroForm.css'
 
 export default function CadastroForm(): React.JSX.Element {
-    const [formData, setFormData] = useState<User>({
-        nome: '',
-        email: '',
-        idade: 0,
-        senha: ''
-    })
-    const [campoConfirmSenha, setCampoConfirmSenha] = useState<string>('')
-    const [autorizado, setAutorizado] = useState<boolean>(false)
+    const [formData, setFormData] = useState<User>({nome: '', email: '', idade: 0, senha: ''})
     const [emailValido, setEmailValido] = useState<boolean>(false)
     const [senhaValida, setSenhaValida] = useState<boolean>(false)
+    const [campoConfirmSenha, setCampoConfirmSenha] = useState<string>('')
+    const [autorizadoLGPD, setAutorizadoLGPD] = useState<boolean>(false)
+
     const [primeiraTentativa, setPrimeiraTentativa] = useState<boolean>(false)
+    const [statusCadastro, setStatusCadastro] = useState<boolean>(false)
+    const [msgBox, setMsgBox] = useState<string>('')
+    
+    const navigate = useNavigate()
 
     useEffect(() => {
         setEmailValido(validarCamposInputs({ tipo: 'email', valor: formData.email }))
         setSenhaValida(validarCamposInputs({ tipo: 'senha', valor: formData.senha }))
     }, [formData.email, formData.senha, campoConfirmSenha, primeiraTentativa])
 
-    const cadastrarUsuario = async () => {
-        if (emailValido && senhaValida && autorizado && formData.nome.length > 0 && campoConfirmSenha == formData.senha) {
-            try {
-                const response = await fetch('http://localhost:3000/users', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                })
-
-                if (response.ok) {
-                    const data = await response.json()
-                    console.log('Usuário cadastrado com sucesso:', data)
-                } else {
-                    console.error('Erro ao cadastrar usuário:', response.statusText)
-                }
-            } catch (error) {
-                console.error('Erro ao realizar cadastro:', error)
+    const cadastrar = async () => {
+        if (emailValido && senhaValida && autorizadoLGPD && formData.nome.length > 0 && campoConfirmSenha == formData.senha) {
+            if(await checarCredenciais({ action: 'cadastro', email: formData.email }) == false) {
+                await cadastrarUser({dadosFormulario: formData})
+                setStatusCadastro(true)
+                setMsgBox('Cadastro realizado com sucesso!')
+                setTimeout(() => {
+                    navigate("/login")
+                }, 2000)
+            } else {
+                setPrimeiraTentativa(true)
+                setStatusCadastro(false)
+                setMsgBox('E-mail já cadastrado')
             }
         } else {
             // será pop-up futuramente
-            console.log('Preencha todos os campos corretamente antes de cadastrar.')
             setPrimeiraTentativa(true)
             if (formData.email.length == 0) setEmailValido(true)
             if (formData.senha != campoConfirmSenha) setSenhaValida(true)
@@ -56,8 +52,16 @@ export default function CadastroForm(): React.JSX.Element {
     return (
         <form id='cadastro-form' onSubmit={(e) => {
             e.preventDefault()
-            cadastrarUsuario()
+            cadastrar()
         }}>
+            {
+                primeiraTentativa ?
+                <BoxMensagem
+                    tipo={statusCadastro ? 'sucesso' : 'erro'}
+                    msg={msgBox}
+                />
+                : null
+            }
             <Input
                 InputType="text"
                 inputLabel="Nome Completo"
@@ -92,10 +96,10 @@ export default function CadastroForm(): React.JSX.Element {
                 />
             </div>
             <div className="aceitar-lgpd">
-                <input type="checkbox" className="mr-2" onChange={(e) => setAutorizado(e.target.checked)} />
+                <input type="checkbox" className="mr-2" onChange={(e) => setAutorizadoLGPD(e.target.checked)} />
                 <p>Li e aceito os <a href="/termos-de-uso" target="_blank" rel="noopener noreferrer" className="link">Termos de Uso</a> e a <a href="/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="link">Política de Privacidade</a></p>
             </div>
-            <Botao texto="Cadastrar" tipo='primario' />
+            <Botao texto="Cadastrar" tipo={autorizadoLGPD ? 'primario' : 'block'} />
         </form>
     )
 }

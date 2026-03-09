@@ -18,7 +18,7 @@ model User {
     nome        String      @map("name")
     email       String      @unique
     senha       String
-    idade       Int?        @map("age")
+    data_nasc   DateTime?   @default(now())
     createdAt   DateTime    @default(now())
     ativo       Boolean     @default(true) @map("isActive")
 
