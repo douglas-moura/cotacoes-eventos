@@ -31,7 +31,7 @@ model Acessos {
     id              Int         @id @default(autoincrement())
     user_id         Int
     dispositivo     String
-    data_login      DateTime
+    data_login      DateTime @default(now())
 
     fk_usuario User @relation(fields: [user_id], references: [id])
 

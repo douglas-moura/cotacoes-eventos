@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "acessos" ALTER COLUMN "data_login" SET DEFAULT CURRENT_TIMESTAMP;

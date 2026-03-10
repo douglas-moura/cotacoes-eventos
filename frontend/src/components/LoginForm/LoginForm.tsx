@@ -12,32 +12,41 @@ export default function LoginForm(): React.JSX.Element {
     // dados do form de login
     const [email, setEmail] = useState<string>('')
     const [senha, setSenha] = useState<string>('')
-    // status da tentativa de login
-    const [statusLogin, setStatusLogin] = useState<boolean>(true)
+    // variavel para mensagens
+    const [msgBox, setMsgBox] = useState<string[]>(['', ''])
     // navigate do router
     let navigate = useNavigate()
 
     const logar = async (): Promise<void> => {
-        try {
-            const response = await fetch('http://localhost:3000/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, senha })
-            })
+        if (email.length > 0 || senha.length > 0) {
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, senha })
+                })
+    
+                if (response.ok) {
+                    const data = await response.json()
 
-            if (response.ok) {
-                setStatusLogin(true)
-        
-                setTimeout(() => {
-                    registrarAcesso(email)
+                    setTimeout(() => {
+                        registrarAcesso(data.userId)
+                        setEmail('')
+                        setSenha('')
+                        navigate("/")
+                    }, 1000)
+                } else {
+                    setMsgBox(['erro', 'E-mail ou senha incorretos'])
                     setEmail('')
                     setSenha('')
-                    navigate("/")
-                }, 1000)
-            } else {
-                setStatusLogin(false)
+                }
+            } catch (erro) {
+                setMsgBox(['alerta', 'Erro ao logar, tente novamente mais tarde'])
             }
-        } catch (erro) {
-
+        } else {
+            setMsgBox(['erro', 'Preencha os campos corretamente'])
         }
     }
 
@@ -46,14 +55,14 @@ export default function LoginForm(): React.JSX.Element {
             e.preventDefault()
             logar()
         }}>
-            { !statusLogin && email.length == 0 ? <BoxMensagem tipo="erro" msg="E-mail ou senha incorretos." /> : null }
+            { msgBox[1].length > 0 ? <BoxMensagem tipo={msgBox[0]} msg={msgBox[1]} /> : null }
             <Input
                 InputType="email"
                 inputLabel="Email"
                 value={email}
                 onChange={(value) => {
                     setEmail(value)
-                    setStatusLogin(true)
+                    setMsgBox(['',''])
                 }}
             />
             <Input
@@ -63,7 +72,7 @@ export default function LoginForm(): React.JSX.Element {
                 value={senha}
                 onChange={(value) => {
                     setSenha(value)
-                    setStatusLogin(true)
+                    setMsgBox(['',''])
                 }}
             />
             <Botao texto="Entrar" tipo='primario' />

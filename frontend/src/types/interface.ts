@@ -17,5 +17,4 @@ export interface InputProps {
 export interface NovoAcesso {
     user_id: number,
     dispositivo: string,
-    data_login: Date,
 }

@@ -4,19 +4,31 @@ const router = express.Router()
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-// rota que retorna todos os usuários
+router.get('/', (req, res) => {
+    res.send('Rota de login funcionando')
+})
+
 router.post('/', async (req, res) => {
+    // pega os dados do body da requisição
     const { email, senha } = req.body
 
-    if (!email || !senha) return res.status(400).json({ error: "E-mail e senha obrigatórios"})
+    // verifica se os dados estão vazios (frontend também verifica previamente)
+    if (!email || !senha) {
+        return res.status(400).json({ error: "E-mail e senha obrigatórios"})
+    }
 
+    // encontra o e-mail do formulário no banco
     const user = await prisma.user.findUnique({
         where: { email }
     })
 
-    if (!user) return res.status(400).json({ error: "Usuário não encontrado"})
+    if (!user) {
+        return res.status(400).json({ error: "Usuário não encontrado"})
+    }
 
-    if (req.params.senha === user.senha) return res.status(400).json({ error: "Senha incorreta"})
+    if (senha !== user.senha) {
+        return res.status(400).json({ error: "Senha incorreta"})
+    }
 
     res.json({userId: user.id, userEmail: user.email})
 })
