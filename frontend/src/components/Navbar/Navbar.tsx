@@ -9,7 +9,11 @@ import { useLocation, Link } from "react-router-dom"
 export default function Navbar(): React.JSX.Element {
     const { pathname } = useLocation()
 
-    if (pathname === "/login" || pathname === "/cadastro") {
+    if (
+        pathname === "/login" ||
+        pathname === "/cadastro" ||
+        pathname === "/reset"
+    ) {
         return <></>
     } else {
         return (
@@ -18,6 +22,7 @@ export default function Navbar(): React.JSX.Element {
                 <Link to="/about">About</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/cadastro">Cadastro</Link>
+                <Link to="/reset">Reset</Link>
             </nav>
         )
     }

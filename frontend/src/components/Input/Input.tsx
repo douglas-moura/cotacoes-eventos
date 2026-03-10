@@ -45,8 +45,8 @@ export default function Input({InputType, inputLabel, placeholder, opcoes, value
                 <span className='input-container'>
                     <label htmlFor="password">{inputLabel}</label>
                     <Icon icon={!verSenha ? 'mdi:eye' : 'mdi:eye-off'} width="20" className='icone-aux' onClick={() => setVerSenha(!verSenha)} />
-                    <input type={!verSenha ? 'password' : 'text'} placeholder={placeholder} className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
-                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>{inputLabel == 'Senha' ? 'A senha deve conter pelo menos 8 caracteres, incluindo uma letra e um número' : 'As senhas precisam ser iguais'}</p>}
+                    <input type={!verSenha ? 'password' : 'text'} placeholder={placeholder ?? '********'} className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>{inputLabel == 'Senha' || inputLabel == 'Nova Senha' ? 'A senha deve conter pelo menos 8 caracteres, incluindo uma letra e um número' : 'As senhas precisam ser iguais'}</p>}
                 </span>
             )
         case 'lista':

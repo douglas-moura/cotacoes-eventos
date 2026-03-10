@@ -10,6 +10,7 @@ import Home from "../pages/Home"
 import About from "../pages/About"
 import Login from "../pages/Login"
 import Cadastro from "../pages/Cadastro"
+import ResetarSenha from "../pages/ResetarSenha"
 
 import Navbar from "../components/Navbar/Navbar"
 
@@ -22,6 +23,7 @@ export default function Router() {
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/reset" element={<ResetarSenha />} />
             </Routes>
         </BrowserRouter>
     )

@@ -36,6 +36,10 @@ h2 {
   @apply text-2xl font-bold mb-4;
 }
 
+h3 {
+  @apply text-xl font-bold mb-4;
+}
+
 .container {
   @apply grid gap-4 w-[1080px] mx-auto;
 }
