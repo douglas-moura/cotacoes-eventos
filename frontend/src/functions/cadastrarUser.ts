@@ -1,6 +1,6 @@
 import { User } from "../types/interface"
 
-export const cadastrarUser = async ({dadosFormulario}: {dadosFormulario: User}): Promise<boolean> => {
+export const cadastrarUser = async (dadosFormulario: User): Promise<boolean> => {
     let status: boolean = false
 
     try {
@@ -12,10 +12,7 @@ export const cadastrarUser = async ({dadosFormulario}: {dadosFormulario: User}):
             body: JSON.stringify(dadosFormulario)
         })
     
-        if (response.ok) {
-            const data = await response.json()
-            status = true
-        }
+        if (response.ok) status = true
     } catch (error) {
         status = false
     }

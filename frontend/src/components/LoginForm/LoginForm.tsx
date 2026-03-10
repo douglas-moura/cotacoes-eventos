@@ -9,35 +9,42 @@ import Botao from '../Botao/Botao'
 import './LoginForm.css'
 
 export default function LoginForm(): React.JSX.Element {
+    // dados do form de login
     const [email, setEmail] = useState<string>('')
     const [senha, setSenha] = useState<string>('')
+    // status da tentativa de login
     const [statusLogin, setStatusLogin] = useState<boolean>(true)
+    // navigate do router
     let navigate = useNavigate()
 
-    const logar = async (checagem: Promise<number>) => {
-        if (await checagem != 0) {
-            const login_infos: NovoAcesso = {
-                user_id: await checagem,
-                dispositivo: navigator.userAgent,
-                data_login: new Date()
-            }            
+    const logar = async (): Promise<void> => {
+        try {
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, senha })
+            })
 
-            setStatusLogin(true)
-            setTimeout(() => {
-                registrarAcesso(login_infos)
-                setEmail('')
-                setSenha('')
-                navigate("/")
-            }, 1000)
-        } else {
-            setStatusLogin(false)
+            if (response.ok) {
+                setStatusLogin(true)
+        
+                setTimeout(() => {
+                    registrarAcesso(email)
+                    setEmail('')
+                    setSenha('')
+                    navigate("/")
+                }, 1000)
+            } else {
+                setStatusLogin(false)
+            }
+        } catch (erro) {
+
         }
     }
 
     return (
         <form id='login-form' className='w-full' onSubmit={(e) => {
             e.preventDefault()
-            logar(checarCredenciais({ action: 'login', email: email, senha: senha }))
+            logar()
         }}>
             { !statusLogin && email.length == 0 ? <BoxMensagem tipo="erro" msg="E-mail ou senha incorretos." /> : null }
             <Input

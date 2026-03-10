@@ -1,4 +1,4 @@
-export default function validarCamposInputs({tipo, valor}: {tipo: string, valor: string | number}): boolean {
+export default function validate({tipo, valor}: {tipo: string, valor: string | number}): boolean {
     const status = false
 
     switch (tipo) {

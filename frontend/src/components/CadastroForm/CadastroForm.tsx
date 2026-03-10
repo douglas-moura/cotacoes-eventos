@@ -5,17 +5,20 @@ import { checarCredenciais } from '../../functions/checarCredenciais'
 import { User } from '../../types/interface'
 import Input from '../Input/Input'
 import Botao from '../Botao/Botao'
-import validarCamposInputs from '../../functions/validate'
+import validate from '../../functions/validate'
 import BoxMensagem from '../BoxMensagem/BoxMensagem'
 import './CadastroForm.css'
 
 export default function CadastroForm(): React.JSX.Element {
+    // dados que vem do formulário
     const [formData, setFormData] = useState<User>({nome: '', email: '', senha: ''})
+    // variáveis para validar email e senha
     const [emailValido, setEmailValido] = useState<boolean>(false)
     const [senhaValida, setSenhaValida] = useState<boolean>(false)
     const [campoConfirmSenha, setCampoConfirmSenha] = useState<string>('')
+    // variavel para checar autorização LGPD e liberar botão cadastro
     const [autorizadoLGPD, setAutorizadoLGPD] = useState<boolean>(false)
-
+    // variaveis auxiliares do UX
     const [primeiraTentativa, setPrimeiraTentativa] = useState<boolean>(false)
     const [statusCadastro, setStatusCadastro] = useState<boolean>(false)
     const [msgBox, setMsgBox] = useState<string>('')
@@ -23,26 +26,32 @@ export default function CadastroForm(): React.JSX.Element {
     const navigate = useNavigate()
 
     useEffect(() => {
-        setEmailValido(validarCamposInputs({ tipo: 'email', valor: formData.email }))
-        setSenhaValida(validarCamposInputs({ tipo: 'senha', valor: formData.senha }))
+        // regex de email e senha para cada alteração nos valores
+        setEmailValido(validate({ tipo: 'email', valor: formData.email }))
+        setSenhaValida(validate({ tipo: 'senha', valor: formData.senha }))
     }, [formData.email, formData.senha, campoConfirmSenha, primeiraTentativa])
 
     const cadastrar = async () => {
+        // FRONTEND - se todos os campos do form estiverem preenchimedos adequadamente
         if (emailValido && senhaValida && autorizadoLGPD && formData.nome.length > 0 && campoConfirmSenha == formData.senha) {
-            if(await checarCredenciais({ action: 'cadastro', email: formData.email }) == 0) {
-                await cadastrarUser({dadosFormulario: formData})
-                setStatusCadastro(true)
-                setMsgBox('Cadastro realizado com sucesso!')
-                setTimeout(() => {
-                    navigate("/login")
-                }, 2000)
-            } else {
-                setStatusCadastro(false)
-                setMsgBox('E-mail já cadastrado')
+            // BACKEND - checa se o e-mail retornar algo do banco (se o e-mail já esta cadastrado)
+            if (await checarCredenciais({email: formData.email}) == 0) {
+                // BACKEND - faz a requisição post para criar o user
+                if (await cadastrarUser(formData)) {
+                    setMsgBox('Cadastro realizado com sucesso!')
+                    setStatusCadastro(true)
+                    setTimeout(() => {
+                        navigate("/login")
+                    }, 2000)
+                } else {
+                    setMsgBox('E-mail já cadastrado')
+                    setStatusCadastro(false)
+                }
             }
             setPrimeiraTentativa(true)
         } else {
             // será pop-up futuramente
+            // msg para preencher campos adequadamente além do validate
             if (formData.email.length == 0) setEmailValido(true)
             if (formData.senha != campoConfirmSenha) setSenhaValida(true)
             setPrimeiraTentativa(true)
