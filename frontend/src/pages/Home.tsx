@@ -8,17 +8,16 @@ export default function Home(): React.JSX.Element {
     // validação do token de login
     const navigate = useNavigate()
     useEffect(() => { if (!verificarLogin()) navigate('/login') }, [])
-        
-    const [users, setUsers] = useState<User[]>([])
     
     return (
-        <div className="p-4">
-            <h1>Home</h1>
-            {users.map((user, index) => (
-                <div key={index}>
-                    {/*user.email*/}
+        <main className="pagina">
+            <section>
+                <div className="container">
+                    <div className="coluna">
+                        <h1>Home</h1>
+                    </div>
                 </div>
-            ))}
-        </div>
+            </section>
+        </main>
     )
 }

@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+.navbar-aside {
+    @apply w-2/12 fixed h-dvh px-4 py-6 bg-neutral-900 justify-between;
+}
+
+.navbar-container {
+    @apply w-full;
+}
+
+.logo-container {
+    @apply flex flex-row items-center w-full py-3 px-2 mb-8;
+}
+
+.logo-icone {
+    @apply mr-2;
+    color: var(--color-primaria);
+}
+
+.logo-container p {
+    @apply text-neutral-100 font-bold text-2xl;
+}
+
+.navbar-link {
+    @apply relative text-neutral-100 flex items-center px-3 py-2 mb-2 rounded transition-all duration-200 hover:bg-neutral-800;
+}
+
+.navbar-link-ativo {
+    @apply hover:text-neutral-100;
+    color: var(--color-primaria);
+}
+
+.navbar-link-icon {
+    @apply mr-3 text-2xl;
+}
+
+.navbar-link p {
+    @apply text-sm;
+}
+
+.navbar-seta {
+    @apply text-lg absolute right-3;
+}

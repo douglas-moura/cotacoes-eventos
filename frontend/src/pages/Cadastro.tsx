@@ -10,7 +10,7 @@ export default function Cadastro(): React.JSX.Element {
     useEffect(() => { if (verificarLogin()) navigate('/') }, [])
 
     return (
-        <main className="pagina">
+        <main>
             <section className="cadastro-titulo">
                 <div className="container">
                     <h1>Criar Conta</h1>

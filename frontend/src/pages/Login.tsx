@@ -11,7 +11,7 @@ export default function Login(): React.JSX.Element {
     useEffect(() => { if (verificarLogin()) navigate('/') }, [])
 
     return (
-        <main className="pagina">
+        <main>
             <section className='sessao-login'>
                 <div className="container container-login">
                     <div className='coluna coluna-formulario'>

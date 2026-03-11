@@ -33,7 +33,7 @@ export default function resetarSenha(): React.JSX.Element {
     }
     
     return (
-        <main className="pagina">
+        <main>
             <section className="sessao-resetar-senha">
                 <div className="container container-resetar-senha">
                     { userEmail.length == 0 ? <EnviarCodigoForm enviarEmail={receberEmail} /> : <NovaSenhaForm status={statusAtualizacao} enviarSenha={receberSenha} /> }

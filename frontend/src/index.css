@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #86B434;
-  --color-primary-dark: #4B651D;
-  --color-secondary: #6234b4;
+  --color-primaria: #86B434;
+  --color-primaria-claro: #9FCC4F;
+  --color-primaria-escuro: #698C29;
+  --color-primaria-dark: #101606;
+  --color-secondaria: #6234b4;
   --color-cinza-1: #F2F2F2;
   --color-cinza-2: #E0E0E0;
 }
@@ -16,12 +18,12 @@ html, body, #root {
   height: 100%;
 }
 
-main, section, span {
+main, section, span, aside {
   @apply flex flex-col;
 }
 
 main {
-  @apply p-4 h-full bg-cinza-1;
+  @apply py-6 h-full bg-cinza-1;
 }
 
 section {
@@ -40,6 +42,10 @@ h3 {
   @apply text-xl font-bold mb-4;
 }
 
+.pagina {
+  @apply w-10/12 mr-0 ml-auto;
+}
+
 .container {
   @apply grid gap-4 w-[1080px] mx-auto;
 }
@@ -49,5 +55,5 @@ h3 {
 }
 
 .link {
-  @apply text-primary hover:underline cursor-pointer;
+  @apply text-primaria hover:underline cursor-pointer;
 }
