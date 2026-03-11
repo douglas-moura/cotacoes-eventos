@@ -35,7 +35,7 @@ export default function LoginForm(): React.JSX.Element {
                         registrarAcesso(data.userId)
                         setEmail('')
                         setSenha('')
-                        navigate("/")
+                        navigate('/')
                     }, 1000)
                 } else {
                     setMsgBox(['erro', 'E-mail ou senha incorretos'])

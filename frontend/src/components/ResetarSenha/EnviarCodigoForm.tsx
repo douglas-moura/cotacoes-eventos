@@ -3,7 +3,11 @@ import Input from "../Input/Input"
 import Botao from "../Botao/Botao"
 import validate from "../../functions/validate"
 
-export default function EnviarCodigoForm(): React.JSX.Element {
+type Props = {
+    enviarEmail: (valor: string) => void
+}
+
+export default function EnviarCodigoForm({ enviarEmail }: Props): React.JSX.Element {
     const [email, setEmail] = useState<string>('')
     const [emailValido, setEmailValido] = useState<boolean>(false)
 
@@ -12,23 +16,30 @@ export default function EnviarCodigoForm(): React.JSX.Element {
         setEmailValido(validate({ tipo: 'email', valor: email }))
     }, [email])
 
+    const mandarEmailCompPai = () => {
+        enviarEmail(email)
+    }
+
     return (
         <form id='nova-senha-form' className="my-auto" onSubmit={(e) => {
             e.preventDefault()
-            //cadastrar()
+            mandarEmailCompPai()
         }}>
-            <h3>E-mail</h3>
+            <h3>E-mail de Recuperação</h3>
             <Input
                 InputType="email"
-                inputLabel="Email"
+                inputLabel="Insira seu e-mail"
                 value={email}
                 status={emailValido || email.length == 0 ? true : false}
                 onChange={(value) => setEmail(value)}
             />
             <Botao
-                texto="Resetar"
-                tipo="primario"
+                texto="Enviar código"
+                tipo={emailValido ? 'primario' : 'block'}
             />
+            <span className="mt-6 border border-neutral-400 p-6">
+                <p className="text-xs text-neutral-400"><strong>⚠️ Aviso:</strong> O envio e a verificação de código ainda não foram implementados. Este formulário está presente apenas para representar essa etapa do processo.</p>
+            </span>
         </form>
     )
 }

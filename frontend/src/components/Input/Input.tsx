@@ -34,7 +34,7 @@ export default function Input({InputType, inputLabel, placeholder, opcoes, value
                             <input type="checkbox" id="lembrar-password" className="mr-2" />
                             Lembre-se de mim
                         </div>
-                        <a href="/esqueci-senha" className="link">
+                        <a href="/reset" className="link">
                             Esqueci minha senha
                         </a>
                     </div>
