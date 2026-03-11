@@ -21,7 +21,7 @@ export default function CadastroForm(): React.JSX.Element {
     // variaveis auxiliares do UX
     const [primeiraTentativa, setPrimeiraTentativa] = useState<boolean>(false)
     const [statusCadastro, setStatusCadastro] = useState<boolean>(false)
-    const [msgBox, setMsgBox] = useState<string>('')
+    const [msgBox, setMsgBox] = useState<string[]>(['', ''])
     
     const navigate = useNavigate()
 
@@ -34,26 +34,28 @@ export default function CadastroForm(): React.JSX.Element {
     const cadastrar = async () => {
         // FRONTEND - se todos os campos do form estiverem preenchimedos adequadamente
         if (emailValido && senhaValida && autorizadoLGPD && formData.nome.length > 0 && campoConfirmSenha == formData.senha) {
-            // BACKEND - checa se o e-mail retornar algo do banco (se o e-mail já esta cadastrado)
-            if (await checarCredenciais({email: formData.email}) == 0) {
+            // BACKEND - checa se o e-mail retornar algo do banco (se o e-mail já esta cadastrado)            
+            if (await checarCredenciais(formData.email)) {
+                setMsgBox(['erro', 'E-mail já cadastrado'])
+            } else {
                 // BACKEND - faz a requisição post para criar o user
                 if (await cadastrarUser(formData)) {
-                    setMsgBox('Cadastro realizado com sucesso!')
+                    setMsgBox(['sucesso', 'Cadastro realizado com sucesso!'])
                     setStatusCadastro(true)
                     setTimeout(() => {
-                        navigate("/login")
+                        navigate('/login')
                     }, 2000)
                 } else {
-                    setMsgBox('E-mail já cadastrado')
+                    setMsgBox(['erro', 'Não foi possível realizar o cadastrado'])
                     setStatusCadastro(false)
                 }
             }
             setPrimeiraTentativa(true)
         } else {
-            // será pop-up futuramente
             // msg para preencher campos adequadamente além do validate
             if (formData.email.length == 0) setEmailValido(true)
             if (formData.senha != campoConfirmSenha) setSenhaValida(true)
+            setMsgBox(['alerta', 'Preencha os campos corretamente'])
             setPrimeiraTentativa(true)
         }
     }
@@ -66,8 +68,8 @@ export default function CadastroForm(): React.JSX.Element {
             {
                 primeiraTentativa ?
                 <BoxMensagem
-                    tipo={statusCadastro ? 'sucesso' : 'erro'}
-                    msg={msgBox}
+                    tipo={msgBox[0]}
+                    msg={msgBox[1]}
                 />
                 : null
             }

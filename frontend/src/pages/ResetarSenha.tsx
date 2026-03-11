@@ -25,8 +25,6 @@ export default function resetarSenha(): React.JSX.Element {
             setTimeout(() => {
                 navigate('/login')
             }, 3000)
-        } else {
-            console.log('não atualizou', statusAtualizacao)
         }
     }
     

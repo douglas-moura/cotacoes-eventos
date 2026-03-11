@@ -12,7 +12,9 @@ export const cadastrarUser = async (dadosFormulario: User): Promise<boolean> => 
             body: JSON.stringify(dadosFormulario)
         })
     
-        if (response.ok) status = true
+        if (response.ok) {
+            status = true
+        }
     } catch (error) {
         status = false
     }

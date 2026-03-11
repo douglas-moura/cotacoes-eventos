@@ -23,7 +23,9 @@ export const registrarAcesso = async (userId: number): Promise<void> => {
             body: JSON.stringify(login_infos)
         })
     
-        if (response.ok) status = true
+        if (response.ok) {
+            status = true
+        }
     } catch (error) {
         status = false
     }

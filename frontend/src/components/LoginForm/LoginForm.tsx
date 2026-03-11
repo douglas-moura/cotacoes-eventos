@@ -33,14 +33,14 @@ export default function LoginForm(): React.JSX.Element {
 
                     setTimeout(() => {
                         registrarAcesso(data.userId)
-                        setEmail('')
-                        setSenha('')
+                        //setEmail('')
+                        //setSenha('')
                         navigate('/')
                     }, 1000)
                 } else {
                     setMsgBox(['erro', 'E-mail ou senha incorretos'])
-                    setEmail('')
-                    setSenha('')
+                    //setEmail('')
+                    //setSenha('')
                 }
             } catch (erro) {
                 setMsgBox(['alerta', 'Erro ao logar, tente novamente mais tarde'])

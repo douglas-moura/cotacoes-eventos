@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const bcrypt = require("bcrypt")
 
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
@@ -26,7 +27,12 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ error: "Usuário não encontrado"})
     }
 
-    if (senha !== user.senha) {
+    const senhaValida = await bcrypt.compare(
+        senha,        // senha digitada
+        user.senha    // hash salvo no banco
+    )
+
+    if (!senhaValida) {
         return res.status(400).json({ error: "Senha incorreta"})
     }
 

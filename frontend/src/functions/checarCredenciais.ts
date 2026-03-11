@@ -1,14 +1,15 @@
-export const checarCredenciais = async ({email, senha}: {email: string, senha?: string}): Promise<number> => {
-    let result: number = 0
+export const checarCredenciais = async (email: string): Promise<boolean> => {
+    let status: boolean = false
 
     try {
         const response = await fetch(`http://localhost:3000/users/${email}`)
-        const data = await response.json()
 
-        if (data) result++
+        if (response.ok) {
+            status = true
+        }
     } catch (error) {
         console.error('Erro ao buscar informações:', error)
     }
 
-    return result
+    return status
 }

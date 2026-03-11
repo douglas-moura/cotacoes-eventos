@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const bcrypt = require("bcrypt")
 
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
@@ -20,9 +21,16 @@ router.post('/', async (req, res) => {
     //req.body     | dados enviados no corpo
     //req.query    | query string da URL
 
+    const senhaHash = await bcrypt.hash(req.body.senha, 10)
+
     const novoUser = await prisma.user.create({
-        data: req.body
+        data: {
+            nome: req.body.nome,
+            email: req.body.email,
+            senha: senhaHash
+        }
     })
+
     res.json(novoUser)
 })
 
@@ -34,7 +42,13 @@ router.get('/:email', async (req, res) => {
     const email = req.params.email
 
     const user = await prisma.user.findUnique({
-        where: { email }
+        where: { email },
+        // retorna apenas as colunas abaixo para melhor segurança
+        select: {
+            id: true,
+            nome: true,
+            email: true
+        }
     })
 
     if (!user) {
@@ -49,11 +63,17 @@ router.patch("/:email", async (req, res) => {
     //req.body     | dados enviados no corpo
     //req.query    | query string da URL
 
+    const dados = { ...req.body }
+
+    if (dados.senha) {
+        dados.senha = await bcrypt.hash(dados.senha, 10)
+    }
+
     const user = await prisma.user.update({
         where: {
             email: req.params.email
         },
-        data: req.body
+        data: dados
     })
 
     res.json(user)
