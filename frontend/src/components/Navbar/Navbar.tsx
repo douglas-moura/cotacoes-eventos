@@ -8,6 +8,7 @@ import { useLocation, Link } from "react-router-dom"
 
 export default function Navbar(): React.JSX.Element {
     const { pathname } = useLocation()
+    const logOut = () => sessionStorage.removeItem('token')
 
     if (
         pathname === "/login" ||
@@ -20,9 +21,12 @@ export default function Navbar(): React.JSX.Element {
             <nav className="absolute bg-red-500">
                 <Link to="/">Home</Link>
                 <Link to="/about">About</Link>
+                {/*
                 <Link to="/login">Login</Link>
                 <Link to="/cadastro">Cadastro</Link>
                 <Link to="/reset">Reset</Link>
+                */}
+                <Link to='/login' onClick={() => logOut()}>Sair</Link>
             </nav>
         )
     }

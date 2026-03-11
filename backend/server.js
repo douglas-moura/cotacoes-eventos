@@ -12,7 +12,12 @@ const loginRoutes = require('./routes/login')
 
 const app = express()
 
-// middlewares - funções que são executadas antes de chegar nas rotas (precisam vir antes das rotas)
+// middlewares GLOBAIS - funções que são executadas antes de chegar nas rotas (precisam vir antes das rotas)
+// verificar autenticação
+// validar dados
+// registrar logs
+// tratar erros
+// .use() -> use este middleware em TODAS as requisições
 app.use(cors())
 app.use(express.json())
 

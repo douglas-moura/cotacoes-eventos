@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router'
+import { verificarLogin } from '../functions/auth'
 import CadastroForm from '../components/CadastroForm/CadastroForm'
 import './Cadastro.css'
 
 export default function Cadastro(): React.JSX.Element {
+    // validação do token de login
+    const navigate = useNavigate()
+    useEffect(() => { if (verificarLogin()) navigate('/') }, [])
+
     return (
         <main className="pagina">
             <section className="cadastro-titulo">

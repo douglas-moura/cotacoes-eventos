@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
@@ -36,7 +37,22 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ error: "Senha incorreta"})
     }
 
-    res.json({userId: user.id, userEmail: user.email})
+    // gerando o TOKEN no backend
+    const token = jwt.sign(
+        // PAYLOAD
+        // não coloque senha
+        // não coloque dados sensíveis
+        { id: user.id, email: user.email },
+        // "ASSINATURA"
+        "segredo_super_secreto",
+        // VALIDADE DO TOKEN
+        // { expiresIn: "15m" }  // 15 minutos
+        // { expiresIn: "1d" }   // 1 dia
+        // { expiresIn: "7d" }   // 7 dias
+        { expiresIn: "2h" }     // 2 horas
+    )
+
+    res.json({token: token, userId: user.id, userEmail: user.email})
 })
 
 module.exports = router

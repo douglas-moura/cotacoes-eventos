@@ -26,7 +26,7 @@ export const registrarAcesso = async (userId: number): Promise<void> => {
         if (response.ok) {
             status = true
         }
-    } catch (error) {
+    } catch (error) {        
         status = false
     }
 

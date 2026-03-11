@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate  } from 'react-router'
-import { checarCredenciais } from '../../functions/checarCredenciais'
 import { registrarAcesso } from '../../functions/registrarAcesso'
-import { NovoAcesso } from '../../types/interface'
 import BoxMensagem from '../BoxMensagem/BoxMensagem'
 import Input from '../Input/Input'
 import Botao from '../Botao/Botao'
@@ -29,7 +27,9 @@ export default function LoginForm(): React.JSX.Element {
                 })
     
                 if (response.ok) {
+                    // salva o TOKEN no frontend
                     const data = await response.json()
+                    sessionStorage.setItem("token", data.token)
 
                     setTimeout(() => {
                         registrarAcesso(data.userId)

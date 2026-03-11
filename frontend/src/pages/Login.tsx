@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { verificarLogin } from '../functions/auth'
 import React from 'react'
 import LoginForm from '../components/LoginForm/LoginForm'
 import './Login.css'
 
 export default function Login(): React.JSX.Element {
+    // validação do token de login
+    const navigate = useNavigate()
+    useEffect(() => { if (verificarLogin()) navigate('/') }, [])
+
     return (
         <main className="pagina">
             <section className='sessao-login'>

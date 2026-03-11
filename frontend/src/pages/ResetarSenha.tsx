@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react"
 import { atualizarSenha } from "../functions/atualizarSenha"
 import { useNavigate } from "react-router"
+import { verificarLogin } from "../functions/auth"
 import NovaSenhaForm from "../components/ResetarSenha/NovaSenhaForm"
 import EnviarCodigoForm from "../components/ResetarSenha/EnviarCodigoForm"
 import './ResetarSenha.css'
 
 export default function resetarSenha(): React.JSX.Element {
+    // validação do token de login
+    const navigate = useNavigate()
+    useEffect(() => { if (verificarLogin()) navigate('/') }, [])
+        
     const [userEmail, setUserEmail] = useState<string>('')
     const [userNovaSenha, setUserNovaSenha] = useState<string>('')
     const [statusAtualizacao, setStatusAtualizacao] = useState<boolean>(false)
-    let navigate = useNavigate()
 
     useEffect(() => {
         if (userEmail.length > 0 && userNovaSenha.length > 0) atualizar()
