@@ -73,7 +73,7 @@ export default function Navbar(): React.JSX.Element {
                             <p className={menuStatus.visibilidadeTexto}>Financeiro</p>
                         </Link>
                         <Link to="/login" className='navbar-link' onClick={() => logOut()}>
-                            <Icon icon="mynaui:logout" className='navbar-link-icon' />
+                            <Icon icon="mynaui:door-open" className='navbar-link-icon' />
                             <p className={menuStatus.visibilidadeTexto}>Sair</p>
                         </Link>
                     </nav>

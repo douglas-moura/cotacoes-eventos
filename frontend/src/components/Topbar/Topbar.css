@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+.topbar {
+    @apply z-800 fixed right-0 bg-neutral-50 border-b border-neutral-200 transition-all duration-200 ease-out;
+}
+
+.topbar-conteudo {
+    @apply h-16 flex flex-row justify-end items-center gap-2 w-[1080px] mx-auto;
+}
+
+.topbar-icone-container {
+    @apply !flex-row items-center p-[.5rem] hover:bg-[var(--color-primaria-light)] rounded-full cursor-pointer;
+}
+
+.topbar-icone {}

@@ -5,7 +5,7 @@
 }
 
 .botao-default {
-    background-color: var(--color-cinza-2);
+    @apply bg-neutral-300;
 }
 
 .botao-primario {
@@ -22,6 +22,5 @@
 }
 
 .botao-block {
-    @apply pointer-events-none cursor-not-allowed;
-    background-color: var(--color-cinza-2);
+    @apply pointer-events-none bg-neutral-300 cursor-not-allowed;
 }

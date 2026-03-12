@@ -5,6 +5,7 @@
   --color-primaria-claro: #9FCC4F;
   --color-primaria-escuro: #698C29;
   --color-primaria-dark: #101606;
+  --color-primaria-light: #E0EEC6;
   --color-secondaria: #6234b4;
   --color-cinza-1: #F2F2F2;
   --color-cinza-2: #E0E0E0;
@@ -24,7 +25,7 @@ main, section, span, aside {
 }
 
 main {
-  @apply py-6 h-full bg-cinza-1;
+  @apply pb-6 pt-20 h-full bg-neutral-100;
 }
 
 section {

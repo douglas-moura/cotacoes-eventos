@@ -25,8 +25,7 @@
 }
 
 .input-default {
-  @apply border p-4 rounded text-sm bg-white outline-none;
-  border-color: var(--color-cinza-2);
+  @apply border border-neutral-300 p-4 rounded text-sm bg-white outline-none;
 }
 
 .input-alert {

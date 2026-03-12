@@ -15,6 +15,7 @@ import ResetarSenha from "../pages/ResetarSenha"
 import Navbar from "../components/Navbar/Navbar"
 import { useContext } from "react"
 import { Context } from "../context/AppContext"
+import Topbar from "../components/Topbar/Topbar"
 
 export default function App() {    
     const context = useContext(Context)
@@ -24,6 +25,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Navbar />
+            <Topbar menuStatus={menuLateralStatus} />
             <Routes>
                 <Route path="/" element={<Home menuStatus={menuLateralStatus} />} />
                 <Route path="/about" element={<About menuStatus={menuLateralStatus} />} />
