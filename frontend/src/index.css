@@ -11,6 +11,7 @@
 }
 
 * {
+  /*@apply border border-red-500;*/
   box-sizing: border-box;
 }
 
@@ -43,7 +44,7 @@ h3 {
 }
 
 .pagina {
-  @apply w-10/12 mr-0 ml-auto;
+  @apply mr-0 ml-auto transition-all duration-200 ease-out;
 }
 
 .container {

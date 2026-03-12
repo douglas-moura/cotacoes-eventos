@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
 .navbar-aside {
-    @apply w-2/12 fixed h-dvh px-4 py-6 bg-neutral-900 justify-between;
+    @apply fixed h-dvh px-4 py-6 bg-neutral-900 justify-between transition-all duration-200 ease-out;
+}
+
+.navbar-recolhe {
+    @apply cursor-pointer text-white absolute -right-4 top-2 bg-neutral-700 border-3 border-neutral-100 rounded-full w-8 aspect-square items-center justify-center;
 }
 
 .navbar-container {
@@ -9,16 +13,16 @@
 }
 
 .logo-container {
-    @apply flex flex-row items-center w-full py-3 px-2 mb-8;
+    @apply flex flex-row items-center w-full px-2 mb-8 min-h-2/10;
 }
 
 .logo-icone {
-    @apply mr-2;
+    @apply transition-all duration-200 ease-out;
     color: var(--color-primaria);
 }
 
-.logo-container p {
-    @apply text-neutral-100 font-bold text-2xl;
+.logo-titulo {
+    @apply text-neutral-100 font-bold text-2xl ml-2;
 }
 
 .navbar-link {
@@ -31,11 +35,19 @@
 }
 
 .navbar-link-icon {
-    @apply mr-3 text-2xl;
+    @apply text-2xl transition-all duration-200 ease-out;
 }
 
 .navbar-link p {
-    @apply text-sm;
+    @apply text-sm ml-3 transition-all duration-200  ease-out;
+}
+
+.navbar-link-aberto {
+    @apply opacity-1;
+}
+
+.navbar-link-fechado {
+    @apply opacity-0;
 }
 
 .navbar-seta {

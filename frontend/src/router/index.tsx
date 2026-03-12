@@ -13,14 +13,20 @@ import Cadastro from "../pages/Cadastro"
 import ResetarSenha from "../pages/ResetarSenha"
 
 import Navbar from "../components/Navbar/Navbar"
+import { useContext } from "react"
+import { Context } from "../context/AppContext"
 
-export default function Router() {    
+export default function App() {    
+    const context = useContext(Context)
+    if (!context) return <></>
+    const { menuLateralStatus } = context
+
     return (
         <BrowserRouter>
             <Navbar />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
+                <Route path="/" element={<Home menuStatus={menuLateralStatus} />} />
+                <Route path="/about" element={<About menuStatus={menuLateralStatus} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/reset" element={<ResetarSenha />} />
