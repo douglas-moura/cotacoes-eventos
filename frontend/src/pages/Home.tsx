@@ -13,7 +13,7 @@ export default function Home({ menuStatus }: {menuStatus: boolean}): React.JSX.E
             <section>
                 <div className="container">
                     <div className="coluna">
-                        <h1>Home</h1>
+                        <h1>Bem vindo, NOME</h1>
                     </div>
                 </div>
             </section>

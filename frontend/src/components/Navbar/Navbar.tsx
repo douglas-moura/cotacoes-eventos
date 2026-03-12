@@ -45,7 +45,7 @@ export default function Navbar(): React.JSX.Element {
                 <div>
                     <div className="logo-container">
                         <Icon icon="hugeicons:home-12" className={['logo-icone', menuStatus.aberto ? 'text-5xl' : 'text-3xl'].join(' ')} />
-                        <p className={['logo-titulo', menuStatus.visibilidadeTexto].join(' ')}>Eventfy</p>
+                        <p className={['logo-titulo font-outfit', menuStatus.visibilidadeTexto].join(' ')}>Eventfy</p>
                     </div>
                     <nav className="navbar-container">
                         <Link to="/" className={`navbar-link ${pathname == "/" ? "navbar-link-ativo" : null}`}>
