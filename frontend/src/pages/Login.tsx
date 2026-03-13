@@ -17,7 +17,7 @@ export default function Login(): React.JSX.Element {
                     <div className='coluna coluna-formulario'>
                         <h2>Login</h2>
                         <LoginForm />
-                        <p className='w-full text-center mt-8 text-sm'>Não tem uma conta? <a className='link' href="/cadastro">Cadastre-se aqui.</a></p>
+                        <p className='w-full text-center mt-8 text-xs'>Não tem uma conta? <a className='link' href="/cadastro">Cadastre-se aqui.</a></p>
                     </div>
                     <div className='coluna bg-[url("./assets/img/jantar-no-jardim.jpg")] bg-cover bg-center'></div>
                 </div>

@@ -80,12 +80,16 @@ html, body, #root {
   height: 100%;
 }
 
+body {
+  @apply font-nunito text-sm;
+}
+
 main, section, span, aside {
-  @apply flex flex-col font-nunito;
+  @apply flex flex-col;
 }
 
 main {
-  @apply pb-6 pt-24 h-full bg-neutral-100;
+  @apply p-8 min-h-dvh bg-neutral-100;
 }
 
 section {
@@ -105,7 +109,7 @@ h3 {
 }
 
 .pagina {
-  @apply mr-0 ml-auto transition-all duration-200 ease-out;
+  @apply mr-0 ml-auto !pt-24 transition-all duration-200 ease-out;
 }
 
 .container {

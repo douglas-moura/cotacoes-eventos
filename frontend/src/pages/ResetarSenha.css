@@ -9,5 +9,5 @@
 }
 
 .container-resetar-senha form {
-    @apply bg-white mx-auto p-12 w-1/2;
+    @apply bg-white mx-auto p-12 w-5/12;
 }

@@ -13,7 +13,7 @@
 }
 
 .logo-container {
-    @apply flex flex-row items-center w-full px-2 mb-8 min-h-2/10;
+    @apply flex flex-row items-center w-full rounded relative px-2 mb-6 min-h-2/12;
 }
 
 .logo-icone {
@@ -22,11 +22,11 @@
 }
 
 .logo-titulo {
-    @apply text-neutral-100 leading-none font-bold text-2xl ml-2;
+    @apply text-neutral-100 leading-none font-bold text-xl ml-2;
 }
 
 .navbar-link {
-    @apply relative text-neutral-100 flex items-center px-3 py-2 mb-2 rounded transition-all duration-200 hover:bg-neutral-800;
+    @apply relative text-neutral-100 flex items-center p-2 m-1 rounded transition-all duration-200 hover:bg-neutral-800;
 }
 
 .navbar-link-ativo {
@@ -35,11 +35,11 @@
 }
 
 .navbar-link-icon {
-    @apply text-2xl transition-all duration-200 ease-out;
+    @apply text-[1.2rem] transition-all duration-200 ease-out;
 }
 
 .navbar-link p {
-    @apply text-sm ml-3 leading-none transition-all duration-200 ease-out;
+    @apply text-[.75rem] ml-3 leading-none transition-all duration-200 ease-out;
 }
 
 .navbar-link-aberto {

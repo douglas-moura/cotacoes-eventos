@@ -25,7 +25,7 @@ export default function EnviarCodigoForm({ enviarEmail }: Props): React.JSX.Elem
             e.preventDefault()
             mandarEmailCompPai()
         }}>
-            <h3>E-mail de Recuperação</h3>
+            <h3 className="font-bold">E-mail de Recuperação</h3>
             <Input
                 InputType="email"
                 inputLabel="Insira seu e-mail"

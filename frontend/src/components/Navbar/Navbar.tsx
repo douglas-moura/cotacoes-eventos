@@ -44,7 +44,7 @@ export default function Navbar(): React.JSX.Element {
                 </span>
                 <div>
                     <div className="logo-container">
-                        <Icon icon="hugeicons:home-12" className={['logo-icone', menuStatus.aberto ? 'text-5xl' : 'text-3xl'].join(' ')} />
+                        <Icon icon="hugeicons:home-12" className={['logo-icone', menuStatus.aberto ? 'text-[2.5rem]' : 'text-[2rem] -ml-[.2rem]'].join(' ')} />
                         <p className={['logo-titulo font-outfit', menuStatus.visibilidadeTexto].join(' ')}>Eventfy</p>
                     </div>
                     <nav className="navbar-container">
