@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .sessao-login {
-    @apply h-full justify-center items-center;
+    @apply h-full justify-center items-center my-auto;
 }
 
 .container-login {

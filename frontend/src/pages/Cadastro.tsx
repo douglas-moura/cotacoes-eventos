@@ -11,12 +11,10 @@ export default function Cadastro(): React.JSX.Element {
 
     return (
         <main>
-            <section className="cadastro-titulo">
+            <section className="cadastro-form">
                 <div className="container">
                     <h1>Criar Conta</h1>
                 </div>
-            </section>
-            <section className="cadastro-form">
                 <div className="container grid-cols-2 gap-8">
                     <div className='coluna coluna-cadastro-form'>
                         <CadastroForm />

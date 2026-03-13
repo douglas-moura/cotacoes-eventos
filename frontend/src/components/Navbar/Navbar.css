@@ -39,7 +39,7 @@
 }
 
 .navbar-link p {
-    @apply text-[.75rem] ml-3 leading-none transition-all duration-200 ease-out;
+    @apply text-sm ml-3 leading-none transition-all duration-200 ease-out;
 }
 
 .navbar-link-aberto {

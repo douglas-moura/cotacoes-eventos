@@ -6,11 +6,13 @@
 */
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import Home from "../pages/Home"
-import About from "../pages/About"
 import Login from "../pages/Login"
 import Cadastro from "../pages/Cadastro"
 import ResetarSenha from "../pages/ResetarSenha"
+
+import Home from "../pages/Home"
+import MeuEspaco from "../pages/MeuEspaco"
+import About from "../pages/About"
 
 import Navbar from "../components/Navbar/Navbar"
 import { useContext } from "react"
@@ -28,6 +30,7 @@ export default function App() {
             <Topbar menuStatus={menuLateralStatus} />
             <Routes>
                 <Route path="/" element={<Home menuStatus={menuLateralStatus} />} />
+                <Route path="/meu-espaco" element={<MeuEspaco menuStatus={menuLateralStatus} />} />
                 <Route path="/about" element={<About menuStatus={menuLateralStatus} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />

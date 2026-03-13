@@ -52,7 +52,7 @@ export default function Navbar(): React.JSX.Element {
                             <Icon icon="mynaui:home" className='navbar-link-icon' />
                             <p className={menuStatus.visibilidadeTexto}>Home</p>
                         </Link>
-                        <Link to="/" className={`navbar-link ${pathname == "/espaco" ? "navbar-link-ativo" : null}`}>
+                        <Link to="/meu-espaco" className={`navbar-link ${pathname == "/meu-espaco" ? "navbar-link-ativo" : null}`}>
                             <Icon icon="mynaui:map-pin-house-inside" className='navbar-link-icon' />
                             <p className={menuStatus.visibilidadeTexto}>Meu Espaço</p>
                         </Link>

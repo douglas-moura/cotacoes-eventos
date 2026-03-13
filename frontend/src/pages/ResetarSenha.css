@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .sessao-resetar-senha {
-    @apply h-dvh;
+    @apply my-auto;
 }
 
 .container-resetar-senha {

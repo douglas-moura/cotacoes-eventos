@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { verificarLogin } from '../functions/auth'
 import { useNavigate } from 'react-router'
 
-export default function About({ menuStatus }: {menuStatus: boolean}): React.JSX.Element {
+export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.JSX.Element {
     // validação do token de login
     const navigate = useNavigate()
     useEffect(() => { if (!verificarLogin()) navigate('/login') }, [])
@@ -13,7 +13,7 @@ export default function About({ menuStatus }: {menuStatus: boolean}): React.JSX.
             <section>
                 <div className="container">
                     <div className="coluna">
-                        <h1>About</h1>
+                        <h1>Meu Espaço</h1>
                     </div>
                 </div>
             </section>

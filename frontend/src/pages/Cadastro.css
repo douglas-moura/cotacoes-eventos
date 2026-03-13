@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+.cadastro-form {
+    @apply my-auto;
+}
 .coluna-cadastro-form {
-    @apply bg-white p-12;
+    @apply bg-white p-12 my-auto;
 }
