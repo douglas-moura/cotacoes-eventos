@@ -35,3 +35,36 @@
 #password-assets {
   @apply flex flex-row justify-between items-center;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield; /* Standard property for newer browsers */
+}
+
+.input-toggle {
+  @apply !flex-row justify-between items-center;
+}
+
+.input-toggle-icon {
+  @apply text-5xl cursor-pointer;
+}
+
+.input-toggle input {
+  @apply hidden;
+}
+
+.input-toggle p {
+  @apply text-xs;
+}
+
+.input-toggle-ativo {
+  @apply !text-[var(--color-primaria)];
+}

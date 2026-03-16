@@ -53,3 +53,7 @@
 .navbar-seta {
     @apply text-lg absolute right-3;
 }
+
+.navbar-texto-flutuante {
+    @apply z-800 absolute bg-neutral-800 p-2 rounded w-28 ease-out !text-[.75rem];
+}

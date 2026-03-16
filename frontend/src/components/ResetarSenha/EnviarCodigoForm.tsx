@@ -27,7 +27,7 @@ export default function EnviarCodigoForm({ enviarEmail }: Props): React.JSX.Elem
         }}>
             <h3 className="font-bold">E-mail de Recuperação</h3>
             <Input
-                InputType="email"
+                inputType="email"
                 inputLabel="Insira seu e-mail"
                 value={email}
                 status={emailValido || email.length == 0 ? true : false}

@@ -43,14 +43,14 @@ export default function NovaSenhaForm({ status, enviarSenha }: Props): React.JSX
             <h3>Definir nova senha</h3>
             { msgBox[0].length > 0 && tentativaRealizada ? <BoxMensagem tipo={msgBox[0]} msg={msgBox[1]} /> : null }
             <Input
-                InputType="password-cadastro"
+                inputType="password-cadastro"
                 inputLabel="Nova Senha"
                 value={novaSenha}
                 status={senhaValida || novaSenha.length == 0 ? true : false}
                 onChange={(value) => setNovaSenha(value)}
             />
             <Input
-                InputType="password-cadastro"
+                inputType="password-cadastro"
                 inputLabel="Confirmar Nova Senha"
                 value={campoConfirmSenha}
                 // true significa que a msg some, false que aparece

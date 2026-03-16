@@ -22,18 +22,56 @@ model User {
     createdAt   DateTime    @default(now())
     ativo       Boolean     @default(true) @map("isActive")
 
-    acessos Acessos[]
+    acessos     Acessos[]
+    espacos     Espaco[]
 
     @@map("users")
 }
 
 model Acessos {
     id              Int         @id @default(autoincrement())
+
     user_id         Int
+    fk_usuario User @relation(fields: [user_id], references: [id])
+    
     dispositivo     String
     data_login      DateTime @default(now())
 
-    fk_usuario User @relation(fields: [user_id], references: [id])
-
     @@map("acessos")
+}
+
+model Espaco {
+    id                    Int       @id @default(autoincrement())
+    nome                  String
+
+    proprietario_id       Int                           // chave estrangeira para a tabela User
+    fk_proprietario       User      @relation(fields: [proprietario_id], references: [id])
+
+    area                  Float?
+    capacidade            Int?
+    ambientes             Int?
+    quantidadeBanheiros   Int?
+
+    ativo                  Boolean   @default(true)
+
+    endereco               Endereco?                    // este campo não cria coluna, apenas faz ref a tabela Endereco onde há uma chave estrangeira apontada para cá
+
+    @@map("espacos")
+}
+
+model Endereco {
+    id           Int        @id @default(autoincrement())
+    rua          String
+    numero       String
+    complemento  String?
+    referencia   String?
+    bairro       String
+    cidade       String
+    uf           String     @db.Char(2)
+    cep          Int
+
+    espaco_id    Int        @unique // isto indica para o Prisma que o id do espaco não pode ser repetir aqui (1 para 1)
+    fk_espaco    Espaco     @relation(fields: [espaco_id], references: [id])
+
+    @@map("enderecos")
 }

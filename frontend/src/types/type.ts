@@ -1,4 +1,25 @@
-export type EstilosMenu = {
-    aberto: boolean,
-    visibilidadeTexto: string
+import { EstilosMenu } from "./interface"
+
+export type InputProps = {
+    inputType: string,
+    inputLabel?: string,
+    placeholder?: string,
+    opcoes?: string[],
+    value?: string | number,
+    status?: boolean,
+    className?: string,
+    onChange?: (value: string) => void
+}
+
+export type BoxConteudoProps = {
+    children: React.ReactNode
+    className?: string
+}
+
+export type NavLinkBotaoProps = {
+    path: string,
+    texto: string,
+    icone: string,
+    status: EstilosMenu,
+    seta: boolean
 }

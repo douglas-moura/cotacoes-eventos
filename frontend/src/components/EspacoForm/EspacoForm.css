@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.espaco-form-container {
+    @apply min-h-[400px] relative overflow-hidden scale-100;
+}
+
+.espaco-form-container>span {
+    @apply transition-all duration-300 absolute w-full;
+}

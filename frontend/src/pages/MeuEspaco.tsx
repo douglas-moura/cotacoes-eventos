@@ -2,21 +2,94 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { verificarLogin } from '../functions/auth'
 import { useNavigate } from 'react-router'
+import { Icon } from '@iconify/react'
+import { Espaco } from '../types/interface'
+import BoxConteudo from '../components/BoxConteudo/BoxConteudo'
+import Botao from '../components/Botao/Botao'
+import EspacoForm from '../components/EspacoForm/EspacoForm'
 
 export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.JSX.Element {
     // validação do token de login
     const navigate = useNavigate()
     useEffect(() => { if (!verificarLogin()) navigate('/login') }, [])
-    
-    return (
-        <main className={['pagina', menuStatus ? 'w-[82%]' : 'w-[95%]'].join(' ')}>
-            <section>
-                <div className="container">
-                    <div className="coluna">
+
+    const [espacoAdicionado, setEspacoAdicionado] = useState<boolean>(false)
+    const [espaco, setEspaco] = useState<Espaco>({
+        id: 1,
+        nome: 'TheRedLotus',
+        proprietario: {
+            nome: "Douglas",
+            email: "douglas@email.com",
+            senha: "12345",
+        },
+        endereco: {
+            rua: 'A',
+            numero: '1212',
+            bairro: 'Vila Nova',
+            cidade: 'Bahia',
+            uf: 'BA',
+            cep: 0,
+        },
+        area: 88,
+        capacidade: 100,
+        ambientes: 3,
+        quantidadeBanheiros: 4,
+        quantidadeEntradasSaidas: [2, 2],
+        acessibilidade: [true, true],
+        ativo: true
+    })
+
+    if (!espacoAdicionado) {
+        return (
+            <main className={['pagina', menuStatus ? 'w-[82%]' : 'w-[95%]'].join(' ')}>
+                <section>
+                    <div className="container grid-cols-2 !gap-16">
+                        <span>
+                            <h1>Adicionar novo espaço</h1>
+                            <EspacoForm />
+                        </span>
+                        <BoxConteudo>
+                            <div>
+                                <h3>Título</h3>
+                                <p>Descrição</p>
+                            </div>
+                        </BoxConteudo>
+                    </div>
+                </section>
+            </main>
+        )
+    } else {
+        return (
+            <main className={['pagina', menuStatus ? 'w-[82%]' : 'w-[95%]'].join(' ')}>
+                <section>
+                    <div className="container">
                         <h1>Meu Espaço</h1>
                     </div>
-                </div>
-            </section>
-        </main>
-    )
+                </section>
+                <section className="container">
+                    {!espaco ?
+                        <BoxConteudo className="justify-center items-center">
+                            <h3>Nome do Espaço</h3>
+                            <ul className="li">Capacidade máxima de pessoas</ul>
+                            <ul className="li">Área total (m²)</ul>
+                            <ul className="li">Número de salões / ambientes</ul>
+                            <ul className="li">Altura do pé-direito</ul>
+                            <ul className="li">Área externa / interna</ul>
+                            <ul className="li">Quantidade de banheiros</ul>
+                            <ul className="li">Quantidade de entradas / saídas</ul>
+                            <ul className="li">Acessibilidade (rampa, elevador, etc.)</ul>                            
+                        </BoxConteudo>
+                    :
+                        <BoxConteudo className="justify-center items-center">
+                            <span className='w-1/3 mx-auto items-center text-center my-12'>
+                                <Icon icon="mynaui:danger-triangle" className='text-7xl rotate-15 mb-4 text-neutral-300' />
+                                <p className='mb-6 text-neutral-500'>Você ainda não tem um espaço cadastrado.<br />Cadastre seu primeiro espaço para começar a gerenciar eventos e cotações.</p>
+                                <Botao tipo="outline" texto="Cadastrar Espaço" icone="mynaui:plus-circle" onClick={() => setEspacoAdicionado(true)} />
+                            </span>
+                        </BoxConteudo>
+                    }
+                </section>
+            </main>
+        )
+    }
 }

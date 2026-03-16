@@ -74,7 +74,7 @@ export default function CadastroForm(): React.JSX.Element {
                 : null
             }
             <Input
-                InputType="text"
+                inputType="text"
                 inputLabel="Nome Completo"
                 placeholder="Digite seu nome completo"
                 value={formData.nome}
@@ -82,7 +82,7 @@ export default function CadastroForm(): React.JSX.Element {
                 onChange={(value) => setFormData({ ...formData, nome: value })}
             />
             <Input
-                InputType="email"
+                inputType="email"
                 inputLabel="Email"
                 value={formData.email}
                 status={emailValido || formData.email.length == 0 ? true : false}
@@ -90,7 +90,7 @@ export default function CadastroForm(): React.JSX.Element {
             />
             <div className='grid grid-cols-2 gap-4'>
                 <Input
-                    InputType="password-cadastro"
+                    inputType="password-cadastro"
                     inputLabel="Senha"
                     placeholder='********'
                     value={formData.senha}
@@ -98,7 +98,7 @@ export default function CadastroForm(): React.JSX.Element {
                     onChange={(value) => setFormData({ ...formData, senha: value })}
                 />
                 <Input
-                    InputType="password-cadastro"
+                    inputType="password-cadastro"
                     inputLabel="Confirme sua senha"
                     placeholder='********'
                     // true significa que a msg some, false que aparece

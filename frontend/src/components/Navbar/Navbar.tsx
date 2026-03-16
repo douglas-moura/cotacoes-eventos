@@ -6,11 +6,12 @@
 import React, { useState, useContext } from 'react'
 import { useLocation, Link } from "react-router-dom"
 import { abrirMenu, fecharMenu } from '../../functions/toggleMenuLateral'
-import { EstilosMenu } from '../../types/type'
+import { EstilosMenu } from '../../types/interface'
 import { Icon } from '@iconify/react'
 import { Context } from '../../context/AppContext'
 import RedapeNavbar from '../RodapeNavbar/RodapeNavbar'
 import './NavBar.css'
+import NavlinkBotao from './NavlinkBotao'
 
 export default function Navbar(): React.JSX.Element {
     const context = useContext(Context)
@@ -48,50 +49,19 @@ export default function Navbar(): React.JSX.Element {
                         <p className={['logo-titulo font-outfit', menuStatus.visibilidadeTexto].join(' ')}>Eventfy</p>
                     </div>
                     <nav className="navbar-container">
-                        <Link to="/" className={`navbar-link ${pathname == "/" ? "navbar-link-ativo" : null}`}>
-                            <Icon icon="mynaui:home" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Home</p>
-                        </Link>
-                        <Link to="/meu-espaco" className={`navbar-link ${pathname == "/meu-espaco" ? "navbar-link-ativo" : null}`}>
-                            <Icon icon="mynaui:map-pin-house-inside" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Meu Espaço</p>
-                        </Link>
-                        <Link to="/" className={`navbar-link ${pathname == "/espaco" ? "navbar-link-ativo" : null}`}>
-                            <Icon icon="mynaui:list-check" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Serviços</p>
-                        </Link>
-                        <Link to="/" className={`navbar-link ${pathname == "/espaco" ? "navbar-link-ativo" : null}`}>
-                            <Icon icon="mynaui:file-text" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Orçamentos</p>
-                        </Link>
-                        <Link to="/" className={`navbar-link ${pathname == "/espaco" ? "navbar-link-ativo" : null}`}>
-                            <Icon icon="mynaui:calendar" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Eventos</p>
-                        </Link>
-                        <Link to="/" className={`navbar-link ${pathname == "/espaco" ? "navbar-link-ativo" : null}`}>
-                            <Icon icon="mynaui:dollar" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Financeiro</p>
-                        </Link>
-                        <Link to="/login" className='navbar-link' onClick={() => logOut()}>
-                            <Icon icon="mynaui:door-open" className='navbar-link-icon' />
-                            <p className={menuStatus.visibilidadeTexto}>Sair</p>
-                        </Link>
+                        <NavlinkBotao path='/' texto='Home' icone='mynaui:home' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/meu-espaco' texto='Meu Espaço' icone='mynaui:map-pin-house-inside' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/s' texto='Serviços' icone='mynaui:list-check' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/o' texto='Orçamentos' icone='mynaui:file-text' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/e' texto='Eventos' icone='mynaui:calendar' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/f' texto='Financeiro' icone='mynaui:dollar' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/login' texto='Sair' icone='mynaui:door-open' status={menuStatus} seta={false} />
                     </nav>
                 </div>
                 <div>
-                    <Link to="/suporte" className={`navbar-link ${pathname == "/suporte" ? "navbar-link-ativo" : null}`}>
-                        <Icon icon="mynaui:user" className='navbar-link-icon' />
-                        <p className={menuStatus.visibilidadeTexto}>Perfil</p>
-                    </Link>
-                    <Link to="/about" className={`navbar-link ${pathname == "/about" ? "navbar-link-ativo" : null}`}>
-                        <Icon icon="mynaui:info-circle" className='navbar-link-icon' />
-                        <p className={menuStatus.visibilidadeTexto}>Informações</p>
-                    </Link>
-                    <Link to="/suporte" className={`navbar-link ${pathname == "/suporte" ? "navbar-link-ativo" : null}`}>
-                        <Icon icon="mynaui:question-circle" className='navbar-link-icon' />
-                        <p className={menuStatus.visibilidadeTexto}>Suporte</p>
-                        <Icon icon="mynaui:arrow-right" className={['navbar-seta', menuStatus.visibilidadeTexto].join(' ')} />
-                    </Link>
+                    <NavlinkBotao path='/about' texto='Perfil' icone='mynaui:user' status={menuStatus} seta={false} />
+                    <NavlinkBotao path='/' texto='Informações' icone='mynaui:info-circle' status={menuStatus} seta={false} />
+                    <NavlinkBotao path='/' texto='Suporte' icone='mynaui:question-circle' status={menuStatus} seta={true} />
                     <span className={menuStatus.visibilidadeTexto}>
                         <RedapeNavbar />
                     </span>

@@ -51,13 +51,13 @@ export default function LoginForm(): React.JSX.Element {
     }
 
     return (
-        <form id='login-form' className='w-full' onSubmit={(e) => {
+        <form id='login-form' className='w-full gap-4' onSubmit={(e) => {
             e.preventDefault()
             logar()
         }}>
             { msgBox[1].length > 0 ? <BoxMensagem tipo={msgBox[0]} msg={msgBox[1]} /> : null }
             <Input
-                InputType="email"
+                inputType="email"
                 inputLabel="Email"
                 value={email}
                 onChange={(value) => {
@@ -66,7 +66,7 @@ export default function LoginForm(): React.JSX.Element {
                 }}
             />
             <Input
-                InputType="password-login"
+                inputType="password-login"
                 inputLabel="Senha"
                 placeholder='********'
                 value={senha}

@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.box-conteudo {
+    @apply !bg-neutral-50 p-6 rounded-lg;
+    box-shadow: .1rem 1rem 2rem #e0e0e0;
+}
