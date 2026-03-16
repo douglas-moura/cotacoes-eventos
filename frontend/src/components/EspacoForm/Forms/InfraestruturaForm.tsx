@@ -7,7 +7,7 @@ export default function InfraestruturaForm(): React.JSX.Element {
 
     return (
         <>
-            <div className='grid grid-cols-3 gap-y-2 gap-x-8 scale-98'>
+            <div className='grid grid-cols-3 gap-y-2 gap-x-8 scale-95'>
                 <Input
                     inputType="toggle"
                     inputLabel="Elevador"

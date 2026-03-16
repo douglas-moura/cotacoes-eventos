@@ -50,7 +50,7 @@ input[type=number] {
 }
 
 .input-toggle {
-  @apply !flex-row justify-between items-center;
+  @apply !flex-row items-center;
 }
 
 .input-toggle-icon {
@@ -62,7 +62,7 @@ input[type=number] {
 }
 
 .input-toggle p {
-  @apply text-xs;
+  @apply text-xs ml-2;
 }
 
 .input-toggle-ativo {

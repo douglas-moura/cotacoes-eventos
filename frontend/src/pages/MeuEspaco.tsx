@@ -51,7 +51,17 @@ export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.
                         <BoxConteudo>
                             <div>
                                 <h3>Título</h3>
-                                <p>Descrição</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat dolor massa, rhoncus tincidunt lacus feugiat et. Sed facilisis leo quis nisi facilisis vulputate. Mauris viverra varius massa, et luctus arcu gravida quis. Maecenas mauris ante, feugiat sit amet blandit id, tempus eget ipsum. Aliquam odio tellus, rutrum sit amet nisi vel, ullamcorper tempor arcu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat dolor massa, rhoncus tincidunt lacus feugiat et. Sed facilisi</p>
+                                <h4>Endereço</h4>
+                                <p>Rua Marginal Direita, 293 - Casa</p>
+                                <p>Proximo a garagem de onibus</p>
+                                <p>CEP 08535-450 - Vila Mariana</p>
+                                <p>São Paulo - SP</p>
+                                <div className='grid grid-cols-7'>
+                                    <span>
+                                        <Icon icon='mynaui:arrow-diagonal-two-solid' />
+                                    </span>
+                                </div>
                             </div>
                         </BoxConteudo>
                     </div>

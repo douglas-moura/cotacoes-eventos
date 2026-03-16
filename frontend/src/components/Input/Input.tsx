@@ -26,6 +26,7 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                         placeholder={placeholder}
                         className={`input-default w-full ${status === true ? 'input-alert' : ''}`}
                         value={value}
+                        maxLength={500}
                         onChange={(e) => onChange && onChange(e.target.value)}
                     />
                     {status === true && (<p className='text-[.5rem] mt-1 text-red-500'>Este campo é obrigatório</p>)}
@@ -93,13 +94,13 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
         case 'toggle':
             return (
                 <span className={`input-container ${className}`}>
-                    <p className=''>{inputLabel}</p>
                     <label htmlFor={`checkbox-${inputLabel}`} className="flex flex-row items-center">
                         <Icon
                             icon={isChecked ? "mynaui:toggle-right-solid" : "mynaui:toggle-left"}
                             className={['input-toggle-icon', isChecked ? 'input-toggle-ativo' : ''].join(' ')}
                         />
                     </label>
+                    <p className=''>{inputLabel}</p>
                     <input id={`checkbox-${inputLabel}`} type="checkbox" placeholder="exemplo@email.com.br" className={`input-default ${status === false ? 'input-alert' : ''}`} checked={isChecked} onChange={handleCheckboxChange} />
                 </span>
             )
