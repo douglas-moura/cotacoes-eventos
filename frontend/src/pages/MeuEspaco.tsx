@@ -38,7 +38,7 @@ export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.
         ambientes: 3,
         quantidadeBanheiros: 4,
         descricao: '',
-        acessibilidade: [true, true],
+        infraestrutura: [],
         ativo: true
     })
     
