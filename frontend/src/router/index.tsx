@@ -27,7 +27,7 @@ export default function App() {
     return (
         <BrowserRouter>
             <Navbar />
-            <Topbar menuStatus={menuLateralStatus} />
+            {/*<Topbar menuStatus={menuLateralStatus} />*/}
             <Routes>
                 <Route path="/" element={<Home menuStatus={menuLateralStatus} />} />
                 <Route path="/meu-espaco" element={<MeuEspaco menuStatus={menuLateralStatus} />} />

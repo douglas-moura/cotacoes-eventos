@@ -49,12 +49,12 @@ input[type=number] {
   appearance: textfield; /* Standard property for newer browsers */
 }
 
-.input-toggle {
-  @apply !flex-row items-center;
+.input-toggle-label {
+  @apply cursor-pointer flex flex-row items-center;
 }
 
 .input-toggle-icon {
-  @apply text-5xl cursor-pointer;
+  @apply !text-3xl;
 }
 
 .input-toggle input {
@@ -62,9 +62,9 @@ input[type=number] {
 }
 
 .input-toggle p {
-  @apply text-xs ml-2;
+  @apply text-xs ml-4;
 }
 
 .input-toggle-ativo {
-  @apply !text-[var(--color-primaria)];
+  @apply !text-[var(--color-primaria)] !bg-[var(--color-primaria)];
 }

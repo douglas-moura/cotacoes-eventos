@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { InputProps } from '../../types/type'
 import './Input.css'
+import ToggleInput from './ToggleInput'
 
 export default function Input({inputType, inputLabel, placeholder, opcoes, value, status, className = "", onChange}: InputProps): React.JSX.Element {
     const [verSenha, setVerSenha] = useState<boolean>(false)
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState<boolean>(false);
 
-    const handleCheckboxChange = (event: any) => setIsChecked(event.target.checked);
+    const handleCheckboxChange = (event: any) => {
+        setIsChecked(event.target.checked)
+        onChange && onChange(event.target.checked)
+    }
 
     switch (inputType) {
         case 'text':
@@ -86,7 +90,7 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                 <span className={`input-container ${className}`}>
                     <label htmlFor="lista">{inputLabel}</label>
                     <Icon icon="mdi:keyboard-arrow-down" width="20" className='icone-aux' />
-                    <select className="input-default">
+                    <select className="input-default" onChange={(e) => onChange && onChange(e.target.value)}>
                         {opcoes?.map((opcao) => <option key={opcao} value={opcao}>{opcao}</option>)}
                     </select>
                 </span>
@@ -94,14 +98,23 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
         case 'toggle':
             return (
                 <span className={`input-container ${className}`}>
-                    <label htmlFor={`checkbox-${inputLabel}`} className="flex flex-row items-center">
+                    <label htmlFor={`checkbox-${inputLabel}`} className="input-toggle-label">
+                        {/*
                         <Icon
                             icon={isChecked ? "mynaui:toggle-right-solid" : "mynaui:toggle-left"}
                             className={['input-toggle-icon', isChecked ? 'input-toggle-ativo' : ''].join(' ')}
                         />
+                        */}
+                        <ToggleInput check={isChecked} />
+                        <p className=''>{inputLabel}</p>
                     </label>
-                    <p className=''>{inputLabel}</p>
-                    <input id={`checkbox-${inputLabel}`} type="checkbox" placeholder="exemplo@email.com.br" className={`input-default ${status === false ? 'input-alert' : ''}`} checked={isChecked} onChange={handleCheckboxChange} />
+                    <input
+                        id={`checkbox-${inputLabel}`}
+                        type="checkbox" 
+                        className={`input-default ${status === false ? 'input-alert' : ''}`}
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                    />
                 </span>
             )
         default:

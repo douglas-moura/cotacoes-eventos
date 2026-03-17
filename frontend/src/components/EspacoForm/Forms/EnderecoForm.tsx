@@ -1,9 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Endereco } from "../../../types/interface"
 import { estadosBrasil } from "../../../functions/estadosBrasil"
 import Input from "../../Input/Input"
 
-export default function EnderecoForm(): React.JSX.Element {
+type Props = {
+    enviarDados: (valor: Endereco) => void
+}
+
+export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element {
     const [endereco, setEndereco] = useState<Endereco>({
         rua: '',
         numero: '',
@@ -14,10 +18,14 @@ export default function EnderecoForm(): React.JSX.Element {
         uf: '',
         cep: 0,
     })
+        
+    useEffect(() => mandarDadosCompPai(), [endereco])
+
+    const mandarDadosCompPai = () => enviarDados(endereco)
 
     return (
         <>
-            <div className='grid grid-cols-5 gap-x-4 scale-98'>
+            <div className="espaco-form-subform grid-cols-5">
                 <Input
                     inputType="text"
                     inputLabel="Endereço"
@@ -42,6 +50,14 @@ export default function EnderecoForm(): React.JSX.Element {
                     className="col-span-3"
                 />
                 <Input
+                    inputType="cep"
+                    inputLabel="CEP"
+                    value={endereco.cep}
+                    onChange={(value) => setEndereco({ ...endereco, cep: parseInt(value) })}
+
+                    className="col-span-2"
+                />
+                <Input
                     inputType="text"
                     inputLabel="Bairro"
                     value={endereco.bairro}
@@ -56,14 +72,6 @@ export default function EnderecoForm(): React.JSX.Element {
                     onChange={(value) => setEndereco({ ...endereco, referencia: value })}
 
                     className="col-span-3"
-                />
-                <Input
-                    inputType="cep"
-                    inputLabel="CEP"
-                    value={endereco.cep}
-                    onChange={(value) => setEndereco({ ...endereco, cep: parseInt(value) })}
-
-                    className="col-span-2"
                 />
                 <Input
                     inputType="text"

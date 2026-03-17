@@ -55,13 +55,13 @@ export default function Navbar(): React.JSX.Element {
                         <NavlinkBotao path='/o' texto='Orçamentos' icone='mynaui:file-text' status={menuStatus} seta={false} />
                         <NavlinkBotao path='/e' texto='Eventos' icone='mynaui:calendar' status={menuStatus} seta={false} />
                         <NavlinkBotao path='/f' texto='Financeiro' icone='mynaui:dollar' status={menuStatus} seta={false} />
-                        <NavlinkBotao path='/login' texto='Sair' icone='mynaui:door-open' status={menuStatus} seta={false} />
                     </nav>
                 </div>
                 <div>
-                    <NavlinkBotao path='/about' texto='Perfil' icone='mynaui:user' status={menuStatus} seta={false} />
-                    <NavlinkBotao path='/' texto='Informações' icone='mynaui:info-circle' status={menuStatus} seta={false} />
+                    <NavlinkBotao path='/about' texto='Meu Perfil' icone='mynaui:user' status={menuStatus} seta={false} />
+                    <NavlinkBotao path='/' texto='Condigurações' icone='mynaui:cog-four' status={menuStatus} seta={true} />
                     <NavlinkBotao path='/' texto='Suporte' icone='mynaui:question-circle' status={menuStatus} seta={true} />
+                    <NavlinkBotao path='/login' texto='Sair' icone='mynaui:door-open' status={menuStatus} seta={false} />
                     <span className={menuStatus.visibilidadeTexto}>
                         <RedapeNavbar />
                     </span>

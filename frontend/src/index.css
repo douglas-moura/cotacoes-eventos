@@ -89,7 +89,7 @@ main, section, span, aside {
 }
 
 main {
-  @apply p-8 min-h-dvh bg-neutral-100;
+  @apply p-16 min-h-dvh bg-neutral-100;
 }
 
 section {
@@ -109,11 +109,11 @@ h3 {
 }
 
 .pagina {
-  @apply mr-0 ml-auto !pt-24 transition-all duration-200 ease-out;
+  @apply mr-0 ml-auto transition-all duration-200 ease-out;
 }
 
 .container {
-  @apply grid gap-4 w-[1080px] mx-auto;
+  @apply grid gap-4 max-w-[1080px] mx-auto;
 }
 
 .coluna {

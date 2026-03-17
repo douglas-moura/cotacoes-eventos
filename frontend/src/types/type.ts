@@ -23,3 +23,16 @@ export type NavLinkBotaoProps = {
     status: EstilosMenu,
     seta: boolean
 }
+
+export type EspacoCaracteristicasProps = {
+    nome: string,
+    descricao: string,
+    area: number,
+    capacidade: number,
+    ambientes: number,
+    banheiros: number
+}
+
+export type ToggleInputProps = {
+    check: boolean
+}

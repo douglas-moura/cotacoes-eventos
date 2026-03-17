@@ -4,6 +4,7 @@ import { verificarLogin } from '../functions/auth'
 import { useNavigate } from 'react-router'
 import { Icon } from '@iconify/react'
 import { Espaco } from '../types/interface'
+import { FormEventoEstado } from '../types/interface'
 import BoxConteudo from '../components/BoxConteudo/BoxConteudo'
 import Botao from '../components/Botao/Botao'
 import EspacoForm from '../components/EspacoForm/EspacoForm'
@@ -12,60 +13,57 @@ export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.
     // validação do token de login
     const navigate = useNavigate()
     useEffect(() => { if (!verificarLogin()) navigate('/login') }, [])
-
+    
+    const [formCaract, setFormCaract] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-0"})
+    const [formEndereco, setFormEndereco] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
+    const [formInfra, setFormInfra] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [espacoAdicionado, setEspacoAdicionado] = useState<boolean>(false)
     const [espaco, setEspaco] = useState<Espaco>({
-        id: 1,
-        nome: 'TheRedLotus',
+        nome: '',
         proprietario: {
-            nome: "Douglas",
-            email: "douglas@email.com",
-            senha: "12345",
+            nome: "",
+            email: "",
+            senha: "",
         },
         endereco: {
-            rua: 'A',
-            numero: '1212',
-            bairro: 'Vila Nova',
-            cidade: 'Bahia',
-            uf: 'BA',
+            rua: '',
+            numero: '',
+            bairro: '',
+            cidade: '',
+            uf: '',
             cep: 0,
         },
         area: 88,
         capacidade: 100,
         ambientes: 3,
         quantidadeBanheiros: 4,
-        quantidadeEntradasSaidas: [2, 2],
+        descricao: '',
         acessibilidade: [true, true],
         ativo: true
     })
+    
+    useEffect(() => {
+        if (formCaract.finalizado) {
+            setFormCaract({ ...formCaract, estilo: '-translate-x-full' })
+            setFormEndereco({ ...formEndereco, estilo: "translate-x-0"})
+            setTimeout(() => setFormCaract({ ...formCaract, estilo: '!hidden' }), 200);
+        }
+
+        if (formEndereco.finalizado) {
+            setFormEndereco({ ...formEndereco, estilo: '-translate-x-full' })
+            setFormInfra({ ...formInfra, estilo: "translate-x-0"})
+            setTimeout(() => setFormEndereco({ ...formEndereco, estilo: '!hidden' }), 200);
+        }
+
+        if (formInfra.finalizado) {
+            console.log('Finalizado')
+        }
+    }, [formCaract. finalizado, formEndereco.finalizado, formInfra.finalizado])
 
     if (!espacoAdicionado) {
         return (
             <main className={['pagina', menuStatus ? 'w-[82%]' : 'w-[95%]'].join(' ')}>
-                <section>
-                    <div className="container grid-cols-2 !gap-16">
-                        <span>
-                            <h1>Adicionar novo espaço</h1>
-                            <EspacoForm />
-                        </span>
-                        <BoxConteudo>
-                            <div>
-                                <h3>Título</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat dolor massa, rhoncus tincidunt lacus feugiat et. Sed facilisis leo quis nisi facilisis vulputate. Mauris viverra varius massa, et luctus arcu gravida quis. Maecenas mauris ante, feugiat sit amet blandit id, tempus eget ipsum. Aliquam odio tellus, rutrum sit amet nisi vel, ullamcorper tempor arcu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat dolor massa, rhoncus tincidunt lacus feugiat et. Sed facilisi</p>
-                                <h4>Endereço</h4>
-                                <p>Rua Marginal Direita, 293 - Casa</p>
-                                <p>Proximo a garagem de onibus</p>
-                                <p>CEP 08535-450 - Vila Mariana</p>
-                                <p>São Paulo - SP</p>
-                                <div className='grid grid-cols-7'>
-                                    <span>
-                                        <Icon icon='mynaui:arrow-diagonal-two-solid' />
-                                    </span>
-                                </div>
-                            </div>
-                        </BoxConteudo>
-                    </div>
-                </section>
+                <EspacoForm />
             </main>
         )
     } else {

@@ -26,22 +26,21 @@ export interface Endereco {
 }
 
 export interface Espaco {
-    id: number,
     nome: string,
-    proprietario: User,
-    endereco?: Endereco,
-
+    descricao: string,
     area?: number
     capacidade?: number,
     ambientes?: number,
     quantidadeBanheiros?: number,
-    quantidadeEntradasSaidas?: number[],
-    acessibilidade?: boolean[]
+    proprietario: User,
+    endereco?: Endereco,
+
+    infraestrutura?: string[]
 
     ativo: boolean
 }
 
-export interface FormEvento {
+export interface FormEventoEstado {
     finalizado: boolean,
     estilo: string
 }
