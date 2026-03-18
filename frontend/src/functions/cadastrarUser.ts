@@ -1,6 +1,6 @@
-import { User } from "../types/interface"
+import { NovoUser } from "../types/interface"
 
-export const cadastrarUser = async (dadosFormulario: User): Promise<boolean> => {
+export const cadastrarUser = async (dadosFormulario: NovoUser): Promise<boolean> => {
     let status: boolean = false
 
     try {

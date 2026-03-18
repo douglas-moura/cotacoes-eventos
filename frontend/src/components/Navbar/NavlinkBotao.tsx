@@ -9,20 +9,10 @@ export default function NavlinkBotao({path, texto, icone, status, seta}: NavLink
     const context = useContext(Context)
     if (!context) return <></>
 
-    const { menuLateralStatus, setMenuLateralStatus } = context
     const { pathname } = useLocation()
 
-    console.log(menuLateralStatus);
-    
-    const funcaoNavlink = () => {
-        console.log('executou');
-        
-        if (texto == 'Sair') logOut()
-    }
-
-    const logOut = () => {
-        sessionStorage.removeItem('token')
-    }
+    const logOut = () => sessionStorage.removeItem('token')
+    const funcaoNavlink = () => texto == 'Sair' ? logOut() : null
 
     return (
         <Link to={path} className={`navbar-link group ${pathname == path ? "navbar-link-ativo" : null}`} onClick={() => funcaoNavlink()}>

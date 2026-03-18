@@ -1,6 +1,14 @@
-export interface User {
+export interface UserLogado {
+    token: string,
+    id: number,
+    email: string,
+    nome: string
+}
+
+export interface NovoUser {
     nome: string,
-    email: string
+    email: string,
+    senha: string
 }
 
 export interface NovoAcesso {

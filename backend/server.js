@@ -9,6 +9,8 @@ const cors = require('cors')
 const usersRoutes = require('./routes/users')
 const acessosRoutes = require('./routes/acessos')
 const loginRoutes = require('./routes/login')
+const espacosRoutes = require('./routes/espacos')
+const enderecosRoutes = require('./routes/enderecos')
 
 const app = express()
 
@@ -25,6 +27,8 @@ app.use(express.json())
 app.use('/users', usersRoutes)
 app.use('/acessos', acessosRoutes)
 app.use('/login', loginRoutes)
+app.use('/espacos', espacosRoutes)
+app.use('/enderecos', enderecosRoutes)
 
 // rotas - definem os endpoints da API, ou seja, as URLs que o frontend pode acessar para obter ou enviar dados
 app.get('/', (req, res) => {

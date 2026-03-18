@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { cadastrarUser } from '../../functions/cadastrarUser'
 import { checarCredenciais } from '../../functions/checarCredenciais'
-import { User } from '../../types/interface'
+import { NovoUser } from '../../types/interface'
 import Input from '../Input/Input'
 import Botao from '../Botao/Botao'
 import validate from '../../functions/validate'
@@ -11,7 +11,7 @@ import './CadastroForm.css'
 
 export default function CadastroForm(): React.JSX.Element {
     // dados que vem do formulário
-    const [formData, setFormData] = useState<User>({nome: '', email: '', senha: ''})
+    const [formData, setFormData] = useState<NovoUser>({nome: '', email: '', senha: ''})
     // variáveis para validar email e senha
     const [emailValido, setEmailValido] = useState<boolean>(false)
     const [senhaValida, setSenhaValida] = useState<boolean>(false)

@@ -24,6 +24,7 @@ model User {
 
     acessos     Acessos[]
     espacos     Espaco[]
+    enderecos   Endereco[]
 
     @@map("users")
 }
@@ -68,10 +69,12 @@ model Endereco {
     bairro       String
     cidade       String
     uf           String     @db.Char(2)
-    cep          Int
+    cep          String
 
     espaco_id    Int        @unique // isto indica para o Prisma que o id do espaco não pode ser repetir aqui (1 para 1)
     fk_espaco    Espaco     @relation(fields: [espaco_id], references: [id])
+    user_id      Int        
+    fk_user      User       @relation(fields: [user_id], references: [id])
 
     @@map("enderecos")
 }

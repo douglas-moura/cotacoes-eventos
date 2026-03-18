@@ -25,6 +25,8 @@ Segurança:
 Layout:
 - adaptar para a versão mobile
 - trocar tipo dos arquivos de fonte para um formato mais leve
+- Corrigir bug da tecla TAB no form de cadastro de espaco
 
 Funcionalidade:
 - Paindel ADM
+- Add botão "Anterior" no form de espaço

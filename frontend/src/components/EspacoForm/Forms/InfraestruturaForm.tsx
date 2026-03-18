@@ -18,6 +18,7 @@ export default function InfraestruturaForm({ enviarDados }: Props): React.JSX.El
             <div className="espaco-form-subform grid-cols-2">
                 {infraOpcoes.map((item) => (
                     <Input
+                        key={item.titulo}
                         inputType="toggle"
                         inputLabel={item.titulo}
                         className="input-toggle"
