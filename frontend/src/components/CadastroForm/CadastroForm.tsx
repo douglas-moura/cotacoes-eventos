@@ -78,7 +78,7 @@ export default function CadastroForm(): React.JSX.Element {
                 inputLabel="Nome Completo"
                 placeholder="Digite seu nome completo"
                 value={formData.nome}
-                status={formData.nome.length == 0 && primeiraTentativa == true ? true : false}
+                status={!(formData.nome.length == 0 && primeiraTentativa)}
                 onChange={(value) => setFormData({ ...formData, nome: value })}
             />
             <Input

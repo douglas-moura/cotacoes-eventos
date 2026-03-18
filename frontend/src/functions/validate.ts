@@ -8,6 +8,9 @@ export default function validate({tipo, valor}: {tipo: string, valor: string | n
         case 'senha':
             const senhaRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/
             return senhaRegex.test(valor as string)
+        case 'cep':
+            const cepRegex = /^\d{5}-?\d{3}$/
+            return cepRegex.test(valor as string)
         default:
             return status
     }

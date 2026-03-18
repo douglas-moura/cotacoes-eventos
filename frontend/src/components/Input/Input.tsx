@@ -18,8 +18,8 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
             return (
                 <span className={`input-container ${className}`}>
                     <label htmlFor="text">{inputLabel}</label>
-                    <input type="text" placeholder={placeholder} className={`input-default ${status === true ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
-                    {status == true && <p className='text-[.5rem] mt-1 text-red-500'>Este campo é obrigatório</p>}
+                    <input type="text" placeholder={placeholder} className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
+                    {status === false && <p className='text-[.5rem] mt-1 text-red-500'>Este campo é obrigatório</p>}
                 </span>
             )
         case 'text-longo':
@@ -28,12 +28,12 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                     <label htmlFor="text">{inputLabel}</label>
                     <textarea
                         placeholder={placeholder}
-                        className={`input-default w-full ${status === true ? 'input-alert' : ''}`}
+                        className={`input-default w-full ${status === false ? 'input-alert' : ''}`}
                         value={value}
                         maxLength={500}
                         onChange={(e) => onChange && onChange(e.target.value)}
                     />
-                    {status === true && (<p className='text-[.5rem] mt-1 text-red-500'>Este campo é obrigatório</p>)}
+                    {status === false && (<p className='text-[.5rem] mt-1 text-red-500'>Este campo é obrigatório</p>)}
                 </span>
             )
         case 'number':
@@ -47,8 +47,8 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
             return (
                 <span className={`input-container ${className}`}>
                     <label htmlFor="email">{inputLabel}</label>
-                    <input type="number" placeholder="00000-000" className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
-                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>CEP inválido</p>}
+                    <input type="text" maxLength={9} placeholder="00000-000" className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange((e.target.value).replace(/[^0-9-]/g, ''))} />
+                    {status === false && <p className='text-[.5rem] mt-1 text-red-500'>CEP inválido</p>}
                 </span>
             )
         case 'email':
@@ -56,7 +56,7 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                 <span className={`input-container ${className}`}>
                     <label htmlFor="email">{inputLabel}</label>
                     <input type="email" placeholder="exemplo@email.com.br" className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
-                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>E-mail inválido</p>}
+                    {status === false && <p className='text-[.5rem] mt-1 text-red-500'>E-mail inválido</p>}
                 </span>
             )
         case 'password-login':
@@ -82,7 +82,7 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                     <label htmlFor="password">{inputLabel}</label>
                     <Icon icon={!verSenha ? 'mdi:eye' : 'mdi:eye-off'} width="20" className='icone-aux' onClick={() => setVerSenha(!verSenha)} />
                     <input type={!verSenha ? 'password' : 'text'} placeholder={placeholder ?? '********'} className={`input-default ${status === false ? 'input-alert' : ''}`} value={value} onChange={(e) => onChange && onChange(e.target.value)} />
-                    {status == false && <p className='text-[.5rem] mt-1 text-red-500'>{inputLabel == 'Senha' || inputLabel == 'Nova Senha' ? 'A senha deve conter pelo menos 8 caracteres, incluindo uma letra e um número' : 'As senhas precisam ser iguais'}</p>}
+                    {status === false && <p className='text-[.5rem] mt-1 text-red-500'>{inputLabel == 'Senha' || inputLabel == 'Nova Senha' ? 'A senha deve conter pelo menos 8 caracteres, incluindo uma letra e um número' : 'As senhas precisam ser iguais'}</p>}
                 </span>
             )
         case 'lista':
@@ -90,9 +90,10 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                 <span className={`input-container ${className}`}>
                     <label htmlFor="lista">{inputLabel}</label>
                     <Icon icon="mdi:keyboard-arrow-down" width="20" className='icone-aux' />
-                    <select className="input-default" onChange={(e) => onChange && onChange(e.target.value)}>
+                    <select className={`input-default ${status === false ? 'input-alert' : ''}`} onChange={(e) => onChange && onChange(e.target.value)}>
                         {opcoes?.map((opcao) => <option key={opcao} value={opcao}>{opcao}</option>)}
                     </select>
+                    {status === false && (<p className='text-[.5rem] mt-1 text-red-500'>Obrigatório</p>)}
                 </span>
             )
         case 'toggle':

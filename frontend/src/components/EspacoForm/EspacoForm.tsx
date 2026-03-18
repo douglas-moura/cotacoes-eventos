@@ -3,18 +3,19 @@ import { Endereco, Espaco, FormEventoEstado } from "../../types/interface"
 import { Icon } from "@iconify/react"
 import { EspacoCaracteristicasProps } from "../../types/type"
 import { infraOpcoes } from "../../functions/infrasOpcoes"
+import { cadastrarEspaco } from "../../functions/cadastrarEspaco"
 import Botao from "../Botao/Botao"
 import CaracteristicasForm from "./Forms/CaracteristicasForm"
 import EnderecoForm from "./Forms/EnderecoForm"
 import InfraestruturaForm from "./Forms/InfraestruturaForm"
 import BoxConteudo from "../BoxConteudo/BoxConteudo"
+import validate from "../../functions/validate"
 import './EspacoForm.css'
 
 export default function EspacoForm(): React.JSX.Element {
     const [formCaract, setFormCaract] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-0"})
     const [formEndereco, setFormEndereco] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [formInfra, setFormInfra] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
-
     const [espaco, setEspaco] = useState<Espaco>({
         nome: '',
         descricao: '',
@@ -30,16 +31,12 @@ export default function EspacoForm(): React.JSX.Element {
             bairro: '',
             cidade: '',
             uf: '',
-            cep: 0,
+            cep: '',
         },
 
         infraestrutura: [],
 
-        proprietario: {
-            nome: "Douglas",
-            email: "douglas@email.com",
-            senha: "12345",
-        },
+        proprietarioID: 0,
 
         ativo: true
     })
@@ -49,7 +46,7 @@ export default function EspacoForm(): React.JSX.Element {
         if (formCaract.finalizado) {
             setFormCaract({ ...formCaract, estilo: '-translate-x-full' })
             setFormEndereco({ ...formEndereco, estilo: "translate-x-0"})
-            setTimeout(() => setFormCaract({ ...formCaract, estilo: '!hidden' }), 200);
+            setTimeout(() => setFormCaract({ ...formCaract, estilo: '!hidden' }), 200)
         }
 
         if (formEndereco.finalizado) {
@@ -58,16 +55,45 @@ export default function EspacoForm(): React.JSX.Element {
             setTimeout(() => setFormEndereco({ ...formEndereco, estilo: '!hidden' }), 200);
         }
 
-        if (formInfra.finalizado) {
-            console.log('Finalizado')
-        }
-    }, [formCaract. finalizado, formEndereco.finalizado, formInfra.finalizado])
+        if (formInfra.finalizado) {}
+    }, [formCaract.finalizado, formEndereco.finalizado, formInfra.finalizado])
 
     // função para ativar a troca de formulário
     const avancarEtapa = () => {
-        if (!formCaract.finalizado) setFormCaract({ ...formCaract, finalizado: true })
-        if (!formEndereco.finalizado && formCaract.finalizado) setFormEndereco({ ...formEndereco, finalizado: true })
-        if (!formInfra.finalizado && formEndereco.finalizado) setFormInfra({ ...formInfra, finalizado: true })
+        if (!formCaract.finalizado) {
+            if (
+                espaco.nome.length > 0 &&
+                espaco.descricao.length > 0 &&
+                espaco.area > 0 &&
+                espaco.capacidade > 0 &&
+                espaco.ambientes > 0 &&
+                espaco.quantidadeBanheiros > 0
+            ) {
+                setFormCaract({ ...formCaract, finalizado: true })
+            } else {
+                setFormCaract({ ...formCaract, status: false })
+            }
+        }
+
+        if (!formEndereco.finalizado && formCaract.finalizado) {
+            if (
+                espaco.endereco.rua.length > 0 &&
+                espaco.endereco.numero.length > 0 &&
+                validate({tipo: 'cep', valor: espaco.endereco.cep}) &&
+                espaco.endereco.bairro.length > 0 &&
+                espaco.endereco.cidade.length > 0 &&
+                espaco.endereco.uf.length > 0
+            ) {
+                setFormEndereco({ ...formEndereco, finalizado: true })
+            } else {
+                setFormEndereco({ ...formEndereco, status: false })
+            }
+        }
+
+        if (!formInfra.finalizado && formEndereco.finalizado) {
+            setFormInfra({ ...formInfra, finalizado: true })
+            cadastrarEspaco(espaco)
+        }
     }
     
     // receber dados do subformulario de caracteristicas
@@ -113,22 +139,34 @@ export default function EspacoForm(): React.JSX.Element {
                     <h1>Cadastrar Espaço</h1>
                     <form id='espaco-form' className="" onSubmit={(e) => {
                         e.preventDefault()
-                        //cadastrarEspaco()
                     }}>
                         <span className="espaco-form-container">
                             <span className={["", formCaract?.estilo].join(' ')}>
-                                <CaracteristicasForm enviarDados={receberDadosCaracteristicas} />
+                                <CaracteristicasForm
+                                    statusForm={formCaract.status ?? true}
+                                    enviarDados={receberDadosCaracteristicas}
+                                />
                             </span>
                             <span className={["", formEndereco?.estilo].join(' ')}>
-                                <EnderecoForm enviarDados={receberDadosEndereco} />
+                                <EnderecoForm
+                                    statusForm={formEndereco.status ?? true}
+                                    enviarDados={receberDadosEndereco}
+                                />
                             </span>
                             <span className={["", formInfra?.estilo].join(' ')}>
-                                <InfraestruturaForm enviarDados={receberDadosInfraestrutura} />
+                                <InfraestruturaForm
+                                    enviarDados={receberDadosInfraestrutura}
+                                />
                             </span>
                         </span>
                         <span className="!flex-row w-full justify-end mt-4">
                             <span className="w-1/3">
-                                <Botao tipo="primario" texto={formCaract?.finalizado && formEndereco?.finalizado ? "Finalizar" : "Próximo"} icone={formCaract?.finalizado && formEndereco?.finalizado ? "" : "mynaui:arrow-right-circle"} onClick={() => avancarEtapa()} />
+                                <Botao
+                                    tipo="primario"
+                                    texto={formCaract.finalizado && formEndereco.finalizado ? "Finalizar" : "Próximo"}
+                                    icone={formCaract.finalizado && formEndereco.finalizado ? "" : "mynaui:arrow-right-circle"}
+                                    onClick={() => avancarEtapa()}
+                                />
                             </span>
                         </span>
                     </form>
@@ -141,19 +179,19 @@ export default function EspacoForm(): React.JSX.Element {
                     <div className="espaco-form-resumo-caract">
                         <span>
                             <strong className="">Área (m²)</strong>
-                            <p>{espaco.area}</p>
+                            <p>{espaco.area ? espaco.area : 0}</p>
                         </span>
                         <span>
                             <strong className="">Capacidade</strong>
-                            <p>{espaco.capacidade}</p>
+                            <p>{espaco.capacidade ? espaco.capacidade : 0}</p>
                         </span>
                         <span>
                             <strong className="">Ambientes</strong>
-                            <p>{espaco.ambientes}</p>
+                            <p>{espaco.ambientes ? espaco.ambientes : 0}</p>
                         </span>
                         <span>
                             <strong className="">Banheiros</strong>
-                            <p>{espaco.quantidadeBanheiros}</p>
+                            <p>{espaco.quantidadeBanheiros ? espaco.quantidadeBanheiros : 0}</p>
                         </span>
                     </div>
                     <div className="espaco-form-resumo-endereco">

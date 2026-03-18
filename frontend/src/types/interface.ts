@@ -1,7 +1,6 @@
 export interface User {
     nome: string,
-    email: string,
-    senha: string,
+    email: string
 }
 
 export interface NovoAcesso {
@@ -15,6 +14,7 @@ export interface EstilosMenu {
 }
 
 export interface Endereco {
+    status?: boolean,
     rua: string,
     numero: string,
     complemento?: string,
@@ -22,18 +22,18 @@ export interface Endereco {
     bairro: string,
     cidade: string,
     uf: string,
-    cep: number,
+    cep: string,
 }
 
 export interface Espaco {
     nome: string,
     descricao: string,
-    area?: number
-    capacidade?: number,
-    ambientes?: number,
-    quantidadeBanheiros?: number,
-    proprietario: User,
-    endereco?: Endereco,
+    area: number
+    capacidade: number,
+    ambientes: number,
+    quantidadeBanheiros: number,
+    proprietarioID: number,
+    endereco: Endereco,
 
     infraestrutura?: string[]
 
@@ -42,5 +42,6 @@ export interface Espaco {
 
 export interface FormEventoEstado {
     finalizado: boolean,
-    estilo: string
+    estilo: string,
+    status?: boolean
 }

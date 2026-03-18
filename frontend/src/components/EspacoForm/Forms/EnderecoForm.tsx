@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react"
 import { Endereco } from "../../../types/interface"
 import { estadosBrasil } from "../../../functions/estadosBrasil"
 import Input from "../../Input/Input"
+import validate from "../../../functions/validate"
 
 type Props = {
+    statusForm: boolean
     enviarDados: (valor: Endereco) => void
 }
 
-export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element {
+export default function EnderecoForm({ statusForm, enviarDados }: Props): React.JSX.Element {
+    const [cepValido, setCepValido] = useState<boolean>(false)
     const [endereco, setEndereco] = useState<Endereco>({
+        status: statusForm,
         rua: '',
         numero: '',
         complemento: '',
@@ -16,10 +20,19 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
         bairro: '',
         cidade: '',
         uf: '',
-        cep: 0,
+        cep: '',
     })
         
     useEffect(() => mandarDadosCompPai(), [endereco])
+    
+    useEffect(() => {
+        setEndereco(prev => ({
+            ...prev,
+            status: statusForm
+        }))
+
+        setCepValido(validate({ tipo: 'cep', valor: endereco.cep }))
+    }, [statusForm, endereco.cep])
 
     const mandarDadosCompPai = () => enviarDados(endereco)
 
@@ -31,6 +44,7 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
                     inputLabel="Endereço"
                     placeholder="Av. Nossa Senhora da Graça"
                     value={endereco.rua}
+                    status={!(endereco.rua.length == 0 && !endereco.status)}
                     onChange={(value) => setEndereco({ ...endereco, rua: value })}
 
                     className="col-span-4"
@@ -39,6 +53,7 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
                     inputType="text"
                     inputLabel="Nº"
                     value={endereco.numero}
+                    status={!(endereco.numero.length == 0 && !endereco.status)}
                     onChange={(value) => setEndereco({ ...endereco, numero: value })}
                 />
                 <Input
@@ -53,7 +68,8 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
                     inputType="cep"
                     inputLabel="CEP"
                     value={endereco.cep}
-                    onChange={(value) => setEndereco({ ...endereco, cep: parseInt(value) })}
+                    status={!(!cepValido && !endereco.status)}
+                    onChange={(value) => setEndereco({ ...endereco, cep: value })}
 
                     className="col-span-2"
                 />
@@ -61,6 +77,7 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
                     inputType="text"
                     inputLabel="Bairro"
                     value={endereco.bairro}
+                    status={!(endereco.bairro.length == 0 && !endereco.status)}
                     onChange={(value) => setEndereco({ ...endereco, bairro: value })}
 
                     className="col-span-2"
@@ -77,6 +94,7 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
                     inputType="text"
                     inputLabel="Cidade"
                     value={endereco.cidade}
+                    status={!(endereco.cidade.length == 0 && !endereco.status)}
                     onChange={(value) => setEndereco({ ...endereco, cidade: value })}
                     className="col-span-4"
                 />
@@ -85,6 +103,7 @@ export default function EnderecoForm({ enviarDados }: Props): React.JSX.Element 
                     inputLabel="UF"
                     opcoes={estadosBrasil}
                     value={endereco.uf}
+                    status={!(endereco.uf.length == 0 && !endereco.status)}
                     onChange={(value) => setEndereco({ ...endereco, uf: value })}
                 />
             </div>

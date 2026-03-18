@@ -25,6 +25,7 @@ export type NavLinkBotaoProps = {
 }
 
 export type EspacoCaracteristicasProps = {
+    status: boolean,
     nome: string,
     descricao: string,
     area: number,

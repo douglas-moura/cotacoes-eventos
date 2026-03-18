@@ -20,18 +20,14 @@ export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.
     const [espacoAdicionado, setEspacoAdicionado] = useState<boolean>(false)
     const [espaco, setEspaco] = useState<Espaco>({
         nome: '',
-        proprietario: {
-            nome: "",
-            email: "",
-            senha: "",
-        },
+        proprietarioID: 0,
         endereco: {
             rua: '',
             numero: '',
             bairro: '',
             cidade: '',
             uf: '',
-            cep: 0,
+            cep: '',
         },
         area: 88,
         capacidade: 100,
