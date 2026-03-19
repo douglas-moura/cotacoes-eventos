@@ -26,6 +26,7 @@ router.post('/', authMiddleware, async (req, res) => {
     const novoEspaco = await prisma.espaco.create({
         data: {
             nome: req.body.nome,
+            descricao: req.body.descricao,
             proprietario_id: userId,
             area: req.body.area,
             capacidade: req.body.capacidade,

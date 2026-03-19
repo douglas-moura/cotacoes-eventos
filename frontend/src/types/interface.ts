@@ -43,7 +43,7 @@ export interface Espaco {
     proprietarioID: number,
     endereco: Endereco,
 
-    infraestrutura?: string[]
+    infraestrutura?: number[]
 
     ativo: boolean
 }
@@ -52,4 +52,10 @@ export interface FormEventoEstado {
     finalizado: boolean,
     estilo: string,
     status?: boolean
+}
+
+export interface Infra {
+    id: number,
+    titulo: string
+    icone: string
 }

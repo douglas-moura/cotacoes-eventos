@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { Endereco, Espaco, FormEventoEstado } from "../../types/interface"
+import { Endereco, Espaco, FormEventoEstado, Infra } from "../../types/interface"
 import { Icon } from "@iconify/react"
 import { EspacoCaracteristicasProps } from "../../types/type"
-import { infraOpcoes } from "../../functions/infrasOpcoes"
+import { getInfraOpcoes } from "../../functions/infrasOpcoes"
 import { cadastrarEspaco } from "../../functions/cadastrarEspaco"
 import Botao from "../Botao/Botao"
 import CaracteristicasForm from "./Forms/CaracteristicasForm"
@@ -16,6 +16,7 @@ export default function EspacoForm(): React.JSX.Element {
     const [formCaract, setFormCaract] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-0"})
     const [formEndereco, setFormEndereco] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [formInfra, setFormInfra] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
+    const [infraOpcoesGeral, setInfraOpcoesGeral] = useState<Infra[]>([])
     const [espaco, setEspaco] = useState<Espaco>({
         nome: '',
         descricao: '',
@@ -57,6 +58,15 @@ export default function EspacoForm(): React.JSX.Element {
 
         if (formInfra.finalizado) {}
     }, [formCaract.finalizado, formEndereco.finalizado, formInfra.finalizado])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getInfraOpcoes()
+            setInfraOpcoesGeral(data)
+        }
+
+        fetchData()
+    }, [])
 
     // função para ativar a troca de formulário
     const avancarEtapa = () => {
@@ -128,8 +138,8 @@ export default function EspacoForm(): React.JSX.Element {
     }
     
     // receber dados do subformulario de infraestrutura
-    const receberDadosInfraestrutura = (dado: string[]) => {
-        setEspaco({ ...espaco, infraestrutura: dado })            
+    const receberDadosInfraestrutura = (dado: number[]) => {
+        setEspaco({ ...espaco, infraestrutura: dado })
     }
 
     return (
@@ -204,8 +214,8 @@ export default function EspacoForm(): React.JSX.Element {
                     <div className="espaco-form-resumo-infra">
                         <h4 className="font-extrabold mb-4">Infraestrutura</h4>
                         <div className="grid grid-cols-7 gap-2">
-                            {infraOpcoes?.map((item) => {
-                                const ativo = espaco.infraestrutura?.find(i => i === item.titulo)
+                            {infraOpcoesGeral?.map((item) => {
+                                const ativo = espaco.infraestrutura?.find(i => i === item.id)
 
                                 return (
                                     <span key={item.titulo} className={['espaco-form-resumo-infra-item', ativo ? 'scale-100 opacity-100' : 'scale-50 opacity-0 absolute'].join(' ')}>

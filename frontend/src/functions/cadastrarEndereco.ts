@@ -28,7 +28,6 @@ export const cadastrarEndereco = async (espacoID: number, novoEndereco: Endereco
             status = true
         }
     } catch (erro) {
-        console.error("Erro ao cadastrar endereço", erro)
         status = false
     }
 }

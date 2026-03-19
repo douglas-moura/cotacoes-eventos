@@ -42,20 +42,22 @@ model Acessos {
 }
 
 model Espaco {
-    id                    Int       @id @default(autoincrement())
-    nome                  String
+    id                      Int       @id @default(autoincrement())
+    nome                    String
+    descricao               String    
 
-    proprietario_id       Int                           // chave estrangeira para a tabela User
-    fk_proprietario       User      @relation(fields: [proprietario_id], references: [id])
+    proprietario_id         Int                           // chave estrangeira para a tabela User
+    fk_proprietario         User      @relation(fields: [proprietario_id], references: [id])
 
-    area                  Float?
-    capacidade            Int?
-    ambientes             Int?
-    quantidadeBanheiros   Int?
+    area                    Float?
+    capacidade              Int?
+    ambientes               Int?
+    quantidadeBanheiros     Int?
 
-    ativo                  Boolean   @default(true)
+    ativo                   Boolean   @default(true)
 
-    endereco               Endereco?                    // este campo não cria coluna, apenas faz ref a tabela Endereco onde há uma chave estrangeira apontada para cá
+    endereco                Endereco?                    // este campo não cria coluna, apenas faz ref a tabela Endereco onde há uma chave estrangeira apontada para cá
+    infraestruturas         EspacoInfra[]
 
     @@map("espacos")
 }
@@ -77,4 +79,26 @@ model Endereco {
     fk_user      User       @relation(fields: [user_id], references: [id])
 
     @@map("enderecos")
+}
+
+model Infraestrutura {
+    id          Int         @id @default(autoincrement())
+    titulo      String      @unique
+    icone       String?
+
+    espacos     EspacoInfra[]
+    
+    @@map("infraestruturas")
+}
+
+model EspacoInfra {
+    id          Int             @id @default(autoincrement())
+    
+    espaco_id   Int
+    fk_espaco   Espaco          @relation(fields: [espaco_id], references: [id])
+    
+    infra_id    Int
+    fk_infra    Infraestrutura  @relation(fields: [infra_id], references: [id])
+
+    @@map("rel_espacos_infras")
 }

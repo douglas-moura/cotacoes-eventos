@@ -1,28 +1,39 @@
 import React, { useState, useEffect } from "react"
-import { infraOpcoes } from "../../../functions/infrasOpcoes"
+import { getInfraOpcoes } from "../../../functions/infrasOpcoes"
+import { Infra } from "../../../types/interface"
 import Input from "../../Input/Input"
 
 type Props = {
-    enviarDados: (valor: string[]) => void
+    enviarDados: (valor: number[]) => void
 }
 
 export default function InfraestruturaForm({ enviarDados }: Props): React.JSX.Element {
-    const [infraLista, setInfraLista] = useState<string[]>([])
+    const [infraLista, setInfraLista] = useState<number[]>([])
+    const [infraOpcoesGeral, setInfraOpcoesGeral] = useState<Infra[]>([])
     
     useEffect(() => mandarDadosCompPai(), [infraLista])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getInfraOpcoes()
+            setInfraOpcoesGeral(data)
+        }
+
+        fetchData()
+    }, [])
 
     const mandarDadosCompPai = () => enviarDados(infraLista)
 
     return (
         <>
             <div className="espaco-form-subform grid-cols-2">
-                {infraOpcoes.map((item) => (
+                {infraOpcoesGeral.map((item) => (
                     <Input
-                        key={item.titulo}
+                        key={item.id}
                         inputType="toggle"
                         inputLabel={item.titulo}
                         className="input-toggle"
-                        onChange={(value) => setInfraLista(prev => value ? [...prev, item.titulo] : prev.filter(i => i !== item.titulo))}
+                        onChange={(value) => setInfraLista(prev => value ? [...prev, item.id] : prev.filter(i => i !== item.id))}
                     />
                 ))}
            </div>

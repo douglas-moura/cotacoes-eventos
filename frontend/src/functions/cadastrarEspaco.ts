@@ -1,5 +1,6 @@
-import { Endereco, Espaco, UserLogado } from "../types/interface"
+import { Espaco } from "../types/interface"
 import { cadastrarEndereco } from "./cadastrarEndereco"
+import { cadastrarInfraestruturas } from "./cadastrarInfraestruturas"
 
 export const cadastrarEspaco = async (novoEspaco: Espaco) => {
     let status: boolean = false
@@ -14,7 +15,7 @@ export const cadastrarEspaco = async (novoEspaco: Espaco) => {
             },
             body: JSON.stringify({
                 nome: novoEspaco.nome,
-                proprietario_id: novoEspaco.proprietarioID,
+                descricao: novoEspaco.descricao,
                 area: novoEspaco.area,
                 capacidade: novoEspaco.capacidade,
                 ambientes: novoEspaco.ambientes,
@@ -28,10 +29,14 @@ export const cadastrarEspaco = async (novoEspaco: Espaco) => {
     
         if (response.ok) {
             status = true
-            cadastrarEndereco(espacoId, novoEspaco.endereco)
+            await cadastrarEndereco(espacoId, novoEspaco.endereco)
+            if (novoEspaco.infraestrutura && novoEspaco.infraestrutura.length > 0) {                
+                for(const infraId of novoEspaco.infraestrutura) {
+                    await cadastrarInfraestruturas(espacoId, infraId)
+                }
+            }
         }
     } catch (erro) {
-        console.error("Erro ao cadastrar espaço", erro)
         status = false
     }
 }
