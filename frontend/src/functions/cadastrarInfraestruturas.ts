@@ -1,4 +1,4 @@
-export const cadastrarInfraestruturas = async (espacoID: number, infraID: number) => {
+export const cadastrarInfraestruturas = async (espacoID: number, infraID: number): Promise<boolean> => {
     let status: boolean = false
 
     try {
@@ -19,4 +19,6 @@ export const cadastrarInfraestruturas = async (espacoID: number, infraID: number
     } catch (erro) {
         status = false
     }
+
+    return status
 }

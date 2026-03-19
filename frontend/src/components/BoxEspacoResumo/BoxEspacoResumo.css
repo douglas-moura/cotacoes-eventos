@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+.box-espaco-resumo {
+    @apply !flex-row transition-all duration-200 ease-out justify-between cursor-pointer relative p-4 rounded border border-neutral-300
+}
+
+.box-espaco-resumo-img {
+    @apply w-3/10 aspect-square bg-neutral-400 rounded overflow-hidden
+}
+
+.box-espaco-resumo-titulo {
+    @apply text-xl font-extrabold text-[var(--color-primaria-escuro)]
+}
+
+.box-espaco-resumo-descricao {
+    @apply text-xs mt-4 text-neutral-400
+}
+
+.box-espaco-resumo-tools {
+    @apply !flex-row justify-end !hidden items-center mt-6 absolute right-4 bottom-4
+}
+
+.box-espaco-resumo-tools .tool-icone {
+    @apply transition-all duration-200 ease-out text-xl ml-4
+}
+
+.box-espaco-resumo-nota {
+    @apply !flex-row items-center absolute right-4 top-4
+}
+
+.box-espaco-resumo-nota ul li {
+    @apply inline
+}

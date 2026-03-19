@@ -21,6 +21,7 @@ Segurança:
 - chegagem de e-mail ao solicitar código de confirmação
 - implementar requisições com token
 - inserir validação de user ADM para requisições de registros em massa
+- definir nas rotas de PATCH quais campos podem ser atualizados (espaco, endereço e user)
 
 Layout:
 - adaptar para a versão mobile
@@ -29,4 +30,4 @@ Layout:
 
 Funcionalidade:
 - Paindel ADM
-- Add botão "Anterior" no form de espaço
+- Add botão "Anterior" e "Cancelar" no form de espaço

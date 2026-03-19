@@ -1,6 +1,6 @@
 import { Infra } from "../types/interface"
 
-export const getInfraOpcoes = async (): Promise<Infra[]> => {
+export const getInfraestruturas = async (): Promise<Infra[]> => {
     let infrasOpcoes: Infra[] = [{ id: 0, titulo: "", icone: "" }]
 
     try {

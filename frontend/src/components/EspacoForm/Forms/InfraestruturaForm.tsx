@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { getInfraOpcoes } from "../../../functions/infrasOpcoes"
+import { getInfraestruturas } from "../../../functions/getInfraestruturas"
 import { Infra } from "../../../types/interface"
 import Input from "../../Input/Input"
 
@@ -15,7 +15,7 @@ export default function InfraestruturaForm({ enviarDados }: Props): React.JSX.El
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getInfraOpcoes()
+            const data = await getInfraestruturas()
             setInfraOpcoesGeral(data)
         }
 

@@ -15,6 +15,9 @@ export default function Botao({ texto, tipo, icone, onClick }: { texto: string, 
         case "outline":
             tipoBotao = "botao-outline"
             break
+        case "cancel":
+            tipoBotao = "botao-cancelar"
+            break
         case "block":
             tipoBotao = "botao-block"
             break

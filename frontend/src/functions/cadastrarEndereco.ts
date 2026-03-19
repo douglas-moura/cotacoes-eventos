@@ -1,6 +1,6 @@
 import { Endereco } from "../types/interface"
 
-export const cadastrarEndereco = async (espacoID: number, novoEndereco: Endereco) => {
+export const cadastrarEndereco = async (espacoID: number, novoEndereco: Endereco): Promise<boolean> => {
     let status: boolean = false
     const token = sessionStorage.getItem('token')
 
@@ -30,4 +30,6 @@ export const cadastrarEndereco = async (espacoID: number, novoEndereco: Endereco
     } catch (erro) {
         status = false
     }
+
+    return status
 }

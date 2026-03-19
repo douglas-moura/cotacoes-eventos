@@ -25,6 +25,10 @@
     background-color: var(--color-secondaria);
 }
 
+.botao-cancelar {
+    @apply bg-red-600;
+}
+
 .botao-block {
     @apply pointer-events-none bg-neutral-300 cursor-not-allowed;
 }

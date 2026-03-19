@@ -2,7 +2,7 @@ import { Espaco } from "../types/interface"
 import { cadastrarEndereco } from "./cadastrarEndereco"
 import { cadastrarInfraestruturas } from "./cadastrarInfraestruturas"
 
-export const cadastrarEspaco = async (novoEspaco: Espaco) => {
+export const cadastrarEspaco = async (novoEspaco: Espaco): Promise<boolean> => {
     let status: boolean = false
     const token = sessionStorage.getItem('token')
 
@@ -28,15 +28,24 @@ export const cadastrarEspaco = async (novoEspaco: Espaco) => {
         const espacoId = data.id
     
         if (response.ok) {
-            status = true
-            await cadastrarEndereco(espacoId, novoEspaco.endereco)
-            if (novoEspaco.infraestrutura && novoEspaco.infraestrutura.length > 0) {                
+            let resultEndereco: boolean = false
+            let resultInfraestruturas: boolean = false          
+
+            resultEndereco = await cadastrarEndereco(espacoId, novoEspaco.endereco)
+
+            if (novoEspaco.infraestrutura && novoEspaco.infraestrutura.length > 0) {   
+                let count: number = 0   
                 for(const infraId of novoEspaco.infraestrutura) {
-                    await cadastrarInfraestruturas(espacoId, infraId)
+                    let result = await cadastrarInfraestruturas(espacoId, infraId)
+                    !result ? count++ : null
                 }
+                resultInfraestruturas = count == 0 ? true : false
             }
+            status = resultEndereco && resultInfraestruturas
         }
     } catch (erro) {
         status = false
     }
+
+    return status
 }

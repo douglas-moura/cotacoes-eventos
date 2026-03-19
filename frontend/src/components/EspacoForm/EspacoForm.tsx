@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Endereco, Espaco, FormEventoEstado, Infra } from "../../types/interface"
 import { Icon } from "@iconify/react"
 import { EspacoCaracteristicasProps } from "../../types/type"
-import { getInfraOpcoes } from "../../functions/infrasOpcoes"
+import { getInfraestruturas } from "../../functions/getInfraestruturas"
 import { cadastrarEspaco } from "../../functions/cadastrarEspaco"
 import Botao from "../Botao/Botao"
 import CaracteristicasForm from "./Forms/CaracteristicasForm"
@@ -12,12 +12,17 @@ import BoxConteudo from "../BoxConteudo/BoxConteudo"
 import validate from "../../functions/validate"
 import './EspacoForm.css'
 
-export default function EspacoForm(): React.JSX.Element {
+type Props = {
+    enviarDados: (valor: boolean) => void
+}
+
+export default function EspacoForm({ enviarDados }: Props): React.JSX.Element {
     const [formCaract, setFormCaract] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-0"})
     const [formEndereco, setFormEndereco] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [formInfra, setFormInfra] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [infraOpcoesGeral, setInfraOpcoesGeral] = useState<Infra[]>([])
     const [espaco, setEspaco] = useState<Espaco>({
+        id: 0,
         nome: '',
         descricao: '',
         
@@ -39,7 +44,8 @@ export default function EspacoForm(): React.JSX.Element {
 
         proprietarioID: 0,
 
-        ativo: true
+        ativo: true,
+        visivel: true
     })
 
     // efeito de transição de formulários
@@ -61,7 +67,7 @@ export default function EspacoForm(): React.JSX.Element {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getInfraOpcoes()
+            const data = await getInfraestruturas()
             setInfraOpcoesGeral(data)
         }
 
@@ -103,6 +109,7 @@ export default function EspacoForm(): React.JSX.Element {
         if (!formInfra.finalizado && formEndereco.finalizado) {
             setFormInfra({ ...formInfra, finalizado: true })
             cadastrarEspaco(espaco)
+            resultadoForm(true)
         }
     }
     
@@ -142,6 +149,10 @@ export default function EspacoForm(): React.JSX.Element {
         setEspaco({ ...espaco, infraestrutura: dado })
     }
 
+    const resultadoForm = (result: boolean) => {
+        enviarDados(result)
+    }
+
     return (
         <section>
             <div className="container grid-cols-2 !gap-16">
@@ -169,8 +180,22 @@ export default function EspacoForm(): React.JSX.Element {
                                 />
                             </span>
                         </span>
-                        <span className="!flex-row w-full justify-end mt-4">
-                            <span className="w-1/3">
+                        <span className="!flex-row w-full justify-between mt-4">
+                            <span className="w-1/4">
+                                <Botao
+                                    tipo="cancel"
+                                    texto="Cancelar"
+                                    onClick={() => resultadoForm(true)}
+                                />
+                            </span>
+                            <span className="w-1/4">
+                                <Botao
+                                    tipo="primario"
+                                    texto="Anterior"
+                                    icone={formCaract.finalizado && formEndereco.finalizado ? "" : "mynaui:arrow-left-circle"}
+                                />
+                            </span>
+                            <span className="w-1/4">
                                 <Botao
                                     tipo="primario"
                                     texto={formCaract.finalizado && formEndereco.finalizado ? "Finalizar" : "Próximo"}

@@ -34,6 +34,7 @@ export interface Endereco {
 }
 
 export interface Espaco {
+    id: number,
     nome: string,
     descricao: string,
     area: number
@@ -43,9 +44,10 @@ export interface Espaco {
     proprietarioID: number,
     endereco: Endereco,
 
-    infraestrutura?: number[]
+    infraestrutura?: number[],
 
-    ativo: boolean
+    ativo: boolean,
+    visivel: boolean
 }
 
 export interface FormEventoEstado {

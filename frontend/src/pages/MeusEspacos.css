@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+.tela-fade-in {
+    @apply !opacity-100;
+}
+
+.tela-fade-out {
+    @apply !opacity-0;
+}
+
+.pagina-meus-espacos section {
+    @apply transition-all duration-200 ease-out;
+}

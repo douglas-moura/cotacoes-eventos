@@ -11,7 +11,7 @@ import Cadastro from "../pages/Cadastro"
 import ResetarSenha from "../pages/ResetarSenha"
 
 import Home from "../pages/Home"
-import MeuEspaco from "../pages/MeuEspaco"
+import MeuEspaco from "../pages/MeusEspacos"
 import About from "../pages/About"
 
 import Navbar from "../components/Navbar/Navbar"
@@ -19,7 +19,7 @@ import { useContext } from "react"
 import { Context } from "../context/AppContext"
 import Topbar from "../components/Topbar/Topbar"
 
-export default function App() {    
+export default function App() {
     const context = useContext(Context)
     if (!context) return <></>
     const { menuLateralStatus } = context

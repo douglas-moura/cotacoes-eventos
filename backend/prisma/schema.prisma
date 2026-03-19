@@ -14,91 +14,92 @@ datasource db {
 }
 
 model User {
-    id          Int         @id @default(autoincrement())
-    nome        String      @map("name")
-    email       String      @unique
-    senha       String
-    data_nasc   DateTime?
-    createdAt   DateTime    @default(now())
-    ativo       Boolean     @default(true) @map("isActive")
+    id                          Int                 @id @default(autoincrement())
+    nome                        String              @map("name")
+    email                       String              @unique
+    senha                       String
+    data_nasc                   DateTime?
+    createdAt                   DateTime            @default(now())
+    ativo                       Boolean             @default(true) @map("isActive")
 
-    acessos     Acessos[]
-    espacos     Espaco[]
-    enderecos   Endereco[]
+    acessos                     Acessos[]
+    espacos                     Espaco[]
+    enderecos                   Endereco[]
 
     @@map("users")
 }
 
 model Acessos {
-    id              Int         @id @default(autoincrement())
+    id                          Int                 @id @default(autoincrement())
 
-    user_id         Int
-    fk_usuario User @relation(fields: [user_id], references: [id])
+    user_id                     Int
+    fk_usuario                  User                @relation(fields: [user_id], references: [id])
     
-    dispositivo     String
-    data_login      DateTime @default(now())
+    dispositivo                 String
+    data_login                  DateTime            @default(now())
 
     @@map("acessos")
 }
 
 model Espaco {
-    id                      Int       @id @default(autoincrement())
-    nome                    String
-    descricao               String    
+    id                          Int                 @id @default(autoincrement())
+    nome                        String
+    descricao                   String    
 
-    proprietario_id         Int                           // chave estrangeira para a tabela User
-    fk_proprietario         User      @relation(fields: [proprietario_id], references: [id])
+    proprietario_id             Int                 // chave estrangeira para a tabela User
+    fk_proprietario             User                @relation(fields: [proprietario_id], references: [id])
 
-    area                    Float?
-    capacidade              Int?
-    ambientes               Int?
-    quantidadeBanheiros     Int?
+    area                        Float?
+    capacidade                  Int?
+    ambientes                   Int?
+    quantidadeBanheiros         Int?
 
-    ativo                   Boolean   @default(true)
+    ativo                       Boolean             @default(true)
+    visivel                     Boolean             @default(true)
 
-    endereco                Endereco?                    // este campo não cria coluna, apenas faz ref a tabela Endereco onde há uma chave estrangeira apontada para cá
-    infraestruturas         EspacoInfra[]
+    endereco                    Endereco?           // este campo não cria coluna, apenas faz ref a tabela Endereco onde há uma chave estrangeira apontada para cá
+    infraestruturas             EspacoInfra[]
 
     @@map("espacos")
 }
 
 model Endereco {
-    id           Int        @id @default(autoincrement())
-    rua          String
-    numero       String
-    complemento  String?
-    referencia   String?
-    bairro       String
-    cidade       String
-    uf           String     @db.Char(2)
-    cep          String
+    id                          Int                 @id @default(autoincrement())
+    rua                         String
+    numero                      String
+    complemento                 String?
+    referencia                  String?
+    bairro                      String
+    cidade                      String
+    uf                          String              @db.Char(2)
+    cep                         String
 
-    espaco_id    Int        @unique // isto indica para o Prisma que o id do espaco não pode ser repetir aqui (1 para 1)
-    fk_espaco    Espaco     @relation(fields: [espaco_id], references: [id])
-    user_id      Int        
-    fk_user      User       @relation(fields: [user_id], references: [id])
+    espaco_id                   Int                 @unique // isto indica para o Prisma que o id do espaco não pode ser repetir aqui (1 para 1)
+    fk_espaco                   Espaco              @relation(fields: [espaco_id], references: [id])
+    user_id                     Int        
+    fk_user                     User                @relation(fields: [user_id], references: [id])
 
     @@map("enderecos")
 }
 
 model Infraestrutura {
-    id          Int         @id @default(autoincrement())
-    titulo      String      @unique
-    icone       String?
+    id                          Int                 @id @default(autoincrement())
+    titulo                      String              @unique
+    icone                       String?
 
-    espacos     EspacoInfra[]
+    espacos                     EspacoInfra[]
     
     @@map("infraestruturas")
 }
 
 model EspacoInfra {
-    id          Int             @id @default(autoincrement())
+    id                          Int                 @id @default(autoincrement())
     
-    espaco_id   Int
-    fk_espaco   Espaco          @relation(fields: [espaco_id], references: [id])
+    espaco_id                   Int
+    fk_espaco                   Espaco              @relation(fields: [espaco_id], references: [id])
     
-    infra_id    Int
-    fk_infra    Infraestrutura  @relation(fields: [infra_id], references: [id])
+    infra_id                    Int
+    fk_infra                    Infraestrutura      @relation(fields: [infra_id], references: [id])
 
     @@map("rel_espacos_infras")
 }

@@ -89,7 +89,7 @@ main, section, span, aside {
 }
 
 main {
-  @apply p-16 min-h-dvh bg-neutral-100;
+  @apply py-8 px-16 min-h-dvh bg-neutral-100;
 }
 
 section {
@@ -97,19 +97,27 @@ section {
 }
 
 h1 {
-  @apply text-4xl font-extrabold mb-4;
+  @apply text-4xl font-extrabold mb-4 font-outfit;
 }
 
 h2 {
-  @apply text-2xl font-bold mb-4;
+  @apply text-2xl font-bold mb-4 font-outfit;
 }
 
 h3 {
-  @apply text-xl font-bold mb-4;
+  @apply text-xl font-bold mb-4 font-outfit;
+}
+
+h4 {
+  @apply text-base font-bold mb-4 font-outfit;
 }
 
 .pagina {
   @apply mr-0 ml-auto transition-all duration-200 ease-out;
+}
+
+.pagina-titulo {
+  @apply !mb-8;
 }
 
 .container {
