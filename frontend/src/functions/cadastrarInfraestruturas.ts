@@ -14,10 +14,10 @@ export const cadastrarInfraestruturas = async (espacoID: number, infraID: number
         })
     
         if (response.ok) {
-            status = true
+            status = true            
         }
     } catch (erro) {
-        status = false
+        status = false        
     }
 
     return status

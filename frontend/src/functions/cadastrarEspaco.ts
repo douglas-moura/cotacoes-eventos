@@ -33,10 +33,10 @@ export const cadastrarEspaco = async (novoEspaco: Espaco): Promise<boolean> => {
 
             resultEndereco = await cadastrarEndereco(espacoId, novoEspaco.endereco)
 
-            if (novoEspaco.infraestrutura && novoEspaco.infraestrutura.length > 0) {   
+            if (novoEspaco.infraestruturas && novoEspaco.infraestruturas.length > 0) {   
                 let count: number = 0   
-                for(const infraId of novoEspaco.infraestrutura) {
-                    let result = await cadastrarInfraestruturas(espacoId, infraId)
+                for(const infraId of novoEspaco.infraestruturas) {
+                    let result = await cadastrarInfraestruturas(espacoId, infraId.infra_id)
                     !result ? count++ : null
                 }
                 resultInfraestruturas = count == 0 ? true : false
