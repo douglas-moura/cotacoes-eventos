@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.box-icone-infra {
+    @apply transition-all duration-200 ease-out p-2 justify-center items-center aspect-square bg-[var(--color-primaria-light)] rounded;
+}
+
+.box-icone-infra-icon {
+    @apply text-2xl text-[var(--color-primaria-escuro)]
+}

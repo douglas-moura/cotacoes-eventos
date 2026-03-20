@@ -28,7 +28,28 @@ router.get('/:id', async (req, res) => {
         select: {
             id: true,
             nome: true,
-            descricao: true
+            descricao: true,
+            area: true,
+            capacidade: true,
+            ambientes: true,
+            quantidadeBanheiros: true,
+
+            endereco: {
+                select: {
+                    rua: true,
+                    numero: true,
+                    bairro: true,
+                    cidade: true,
+                    uf: true,
+                    cep: true
+                }
+            },
+
+            infraestruturas: {
+                select: {
+                    infra_id: true
+                }
+            }
         }
     })
 

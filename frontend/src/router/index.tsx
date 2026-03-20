@@ -5,19 +5,22 @@
     é renderizado dentro do BrowserRouter, para que os links funcionem corretamente.
 */
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { useContext } from "react"
+import { Context } from "../context/AppContext"
+
+import Navbar from "../components/Navbar/Navbar"
+import Topbar from "../components/Topbar/Topbar"
 
 import Login from "../pages/Login"
 import Cadastro from "../pages/Cadastro"
 import ResetarSenha from "../pages/ResetarSenha"
 
 import Home from "../pages/Home"
-import MeuEspaco from "../pages/MeusEspacos"
+import MeusEspacos from "../pages/MeusEspacos"
 import About from "../pages/About"
 
-import Navbar from "../components/Navbar/Navbar"
-import { useContext } from "react"
-import { Context } from "../context/AppContext"
-import Topbar from "../components/Topbar/Topbar"
+
+import MeuEspacosDetalhes from "../pages/MeuEspacoDetalhes"
 
 export default function App() {
     const context = useContext(Context)
@@ -30,11 +33,14 @@ export default function App() {
             {/*<Topbar menuStatus={menuLateralStatus} />*/}
             <Routes>
                 <Route path="/" element={<Home menuStatus={menuLateralStatus} />} />
-                <Route path="/meu-espaco" element={<MeuEspaco menuStatus={menuLateralStatus} />} />
+                <Route path="/meus-espacos" element={<MeusEspacos menuStatus={menuLateralStatus} />} />
                 <Route path="/about" element={<About menuStatus={menuLateralStatus} />} />
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/reset" element={<ResetarSenha />} />
+
+                <Route path="/meu-espaco/:id" element={<MeuEspacosDetalhes menuStatus={menuLateralStatus} />} />
             </Routes>
         </BrowserRouter>
     )

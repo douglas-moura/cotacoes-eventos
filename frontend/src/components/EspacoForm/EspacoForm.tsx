@@ -10,6 +10,7 @@ import EnderecoForm from "./Forms/EnderecoForm"
 import InfraestruturaForm from "./Forms/InfraestruturaForm"
 import BoxConteudo from "../BoxConteudo/BoxConteudo"
 import validate from "../../functions/validate"
+import IconeInfraestrutura from "../IconeInfraestrutura/IconeInfraestrutura"
 import './EspacoForm.css'
 
 type Props = {
@@ -40,7 +41,7 @@ export default function EspacoForm({ enviarDados }: Props): React.JSX.Element {
             cep: '',
         },
 
-        infraestrutura: [],
+        infraestruturas: [],
 
         proprietarioID: 0,
 
@@ -145,8 +146,8 @@ export default function EspacoForm({ enviarDados }: Props): React.JSX.Element {
     }
     
     // receber dados do subformulario de infraestrutura
-    const receberDadosInfraestrutura = (dado: number[]) => {
-        setEspaco({ ...espaco, infraestrutura: dado })
+    const receberDadosInfraestrutura = (dado: Infra[]) => {
+        setEspaco({ ...espaco, infraestruturas: dado })
     }
 
     const resultadoForm = (result: boolean) => {
@@ -240,13 +241,8 @@ export default function EspacoForm({ enviarDados }: Props): React.JSX.Element {
                         <h4 className="font-extrabold mb-4">Infraestrutura</h4>
                         <div className="grid grid-cols-7 gap-2">
                             {infraOpcoesGeral?.map((item) => {
-                                const ativo = espaco.infraestrutura?.find(i => i === item.id)
-
-                                return (
-                                    <span key={item.titulo} className={['espaco-form-resumo-infra-item', ativo ? 'scale-100 opacity-100' : 'scale-50 opacity-0 absolute'].join(' ')}>
-                                        <Icon icon={item?.icone || "teste"} className="text-2xl text-[var(--color-primaria-escuro)]" />
-                                    </span>
-                                )
+                                const ativo = espaco.infraestruturas?.find(i => i.infra_id === item.id) ? true : false                                
+                                return <IconeInfraestrutura item={item} ativo={ativo} />
                             })}
                         </div>
                     </div>

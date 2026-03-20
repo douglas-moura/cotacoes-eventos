@@ -3,24 +3,25 @@ import { useEffect, useState, useContext } from 'react'
 import { verificarLogin } from '../functions/auth'
 import { useNavigate } from 'react-router'
 import { Icon } from '@iconify/react'
-import { Espaco } from '../types/interface'
 import { FormEventoEstado } from '../types/interface'
 import { getUserEspacos } from '../functions/getUserEspacos'
 import { Context } from '../context/AppContext'
 import BoxConteudo from '../components/BoxConteudo/BoxConteudo'
 import Botao from '../components/Botao/Botao'
 import EspacoForm from '../components/EspacoForm/EspacoForm'
-import './MeusEspacos.css'
 import BoxEspacoResumo from '../components/BoxEspacoResumo/BoxEspacoResumo'
+import './MeusEspacos.css'
 
-export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.JSX.Element {
+export default function MeusEspacos({ menuStatus }: {menuStatus: boolean}): React.JSX.Element {
     // validação do token de login
     const navigate = useNavigate()
+
     useEffect(() => {
-        if (!verificarLogin()) {
-            navigate('/login')
-        }
+        if (!verificarLogin()) navigate('/login')
+        
+        fetchData()
     }, [])
+
     const context = useContext(Context)
     if (!context) return <></>
     const { meusEspacos, setMeusEspacos } = context
@@ -49,10 +50,6 @@ export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.
             console.log('Finalizado')
         }
     }, [formCaract. finalizado, formEndereco.finalizado, formInfra.finalizado])
-
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     useEffect(() => {
         if (adicionarEspaco) {
@@ -102,7 +99,7 @@ export default function MeuEspaco({ menuStatus }: {menuStatus: boolean}): React.
                                         <p>Espaços cadastrados: {meusEspacos.length}</p>
                                     </div>
                                     <div className="col-span-2 relative">
-                                        <div className="overflow-y-scroll overflow-y-hidden h-[320px] grid gap-4 mb-8">
+                                        <div className="grid gap-4 mb-8">
                                             {meusEspacos.map((espaco) => (
                                                 <BoxEspacoResumo espaco={espaco} />
                                             ))}

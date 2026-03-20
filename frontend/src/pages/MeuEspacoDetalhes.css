@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+.meu-espaco-detalhes-estrutura-container {
+    @apply grid grid-cols-2 gap-2 mt-8
+}
+
+.meu-espaco-detalhes-estrutura-box {
+    @apply bg-neutral-200 p-6 rounded
+}
+
+.meu-espaco-detalhes-estrutura-titulo {
+    
+}
+
+.meu-espaco-detalhes-endereco-container,
+.meu-espaco-detalhes-infras-container {
+    @apply bg-neutral-200 p-6 rounded mt-6
+}
+
+.meu-espaco-detalhes-endereco-container h3,
+.meu-espaco-detalhes-infras-container h3 {
+    @apply !mb-6
+}
+
+.meu-espaco-detalhes-infras-list {
+    @apply grid gap-6 grid-cols-4 border border-neutral-400 p-4 rounded
+}
+
+.meu-espaco-detalhes-infras-box {
+    @apply items-center text-center
+}
+
+.meu-espaco-detalhes-infras-icon {
+    @apply text-2xl mb-2
+}
+
+.meu-espaco-detalhes-infras-texto {
+    @apply text-[.5rem]
+}

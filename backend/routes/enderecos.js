@@ -15,6 +15,20 @@ router.get('/', async (req, res) => {
     res.json(enderecos)
 })
 
+// rota que retorna um enderecos de acordo com a id do espaço
+router.get('/espaco/:id', async (req, res) => {
+    //req.params   | parâmetros da URL
+    //req.body     | dados enviados no corpo
+    //req.query    | query string da URL
+
+    const espacoId = Number(req.params.id)
+
+    const enderecos = await prisma.endereco.findUnique({
+        where: { espaco_id: espacoId }
+    })
+    res.json(enderecos)
+})
+
 // rota que cria um novo registro de enderecos
 router.post('/', authMiddleware, async (req, res) => {
     //req.params   | parâmetros da URL

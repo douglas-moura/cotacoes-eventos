@@ -16,10 +16,6 @@
     @apply mb-4 border border-neutral-200 rounded p-4;
 }
 
-.espaco-form-resumo-infra-item {
-    @apply transition-all duration-200 ease-out justify-center items-center aspect-square bg-[var(--color-primaria-light)] rounded;
-}
-
 .espaco-form-resumo-caract {
     @apply grid grid-cols-4 mb-4 border border-neutral-200 rounded p-4;
 }

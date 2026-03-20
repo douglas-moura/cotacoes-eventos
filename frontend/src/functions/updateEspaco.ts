@@ -15,6 +15,11 @@ export const updateEspaco = async (espacoId: number, acao: string): Promise<bool
                 visivel: false
             }
             break
+        case 'exibir':
+            data = {
+                visivel: true
+            }
+            break
         default:
             data = {}
     }

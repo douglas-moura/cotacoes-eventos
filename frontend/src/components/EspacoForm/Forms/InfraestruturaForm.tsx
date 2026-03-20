@@ -4,11 +4,11 @@ import { Infra } from "../../../types/interface"
 import Input from "../../Input/Input"
 
 type Props = {
-    enviarDados: (valor: number[]) => void
+    enviarDados: (valor: Infra[]) => void
 }
 
 export default function InfraestruturaForm({ enviarDados }: Props): React.JSX.Element {
-    const [infraLista, setInfraLista] = useState<number[]>([])
+    const [infraLista, setInfraLista] = useState<Infra[]>([])
     const [infraOpcoesGeral, setInfraOpcoesGeral] = useState<Infra[]>([])
     
     useEffect(() => mandarDadosCompPai(), [infraLista])
@@ -27,15 +27,19 @@ export default function InfraestruturaForm({ enviarDados }: Props): React.JSX.El
     return (
         <>
             <div className="espaco-form-subform grid-cols-2">
-                {infraOpcoesGeral.map((item) => (
-                    <Input
-                        key={item.id}
+                {infraOpcoesGeral.map((item) => {                    
+                    return <Input
+                        key={item.infra_id}
                         inputType="toggle"
                         inputLabel={item.titulo}
                         className="input-toggle"
-                        onChange={(value) => setInfraLista(prev => value ? [...prev, item.id] : prev.filter(i => i !== item.id))}
+                        onChange={(value) => setInfraLista(
+                            prev => value ? 
+                                [...prev, { infra_id: Number(item.id) }] :
+                                prev.filter(i => i.infra_id !== Number(item.id))
+                        )}
                     />
-                ))}
+                })}
            </div>
         </>
     )

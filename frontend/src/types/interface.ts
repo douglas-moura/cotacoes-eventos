@@ -44,7 +44,7 @@ export interface Espaco {
     proprietarioID: number,
     endereco: Endereco,
 
-    infraestrutura?: number[],
+    infraestruturas?: Infra[],
 
     ativo: boolean,
     visivel: boolean
@@ -57,7 +57,8 @@ export interface FormEventoEstado {
 }
 
 export interface Infra {
-    id: number,
-    titulo: string
-    icone: string
+    id?: number, // preciso rever a nomenclatura da coluna na tabela infraestruturas
+    infra_id: number,
+    titulo?: string
+    icone?: string
 }

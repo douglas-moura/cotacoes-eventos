@@ -21,10 +21,6 @@ export default function Navbar(): React.JSX.Element {
     const { pathname } = useLocation()
     const [menuStatus, setMenuStatus] = useState<EstilosMenu>({aberto: menuLateralStatus, visibilidadeTexto: ''})
 
-    const logOut = () => {
-        sessionStorage.removeItem('token')
-    }
-
     const toggleMenu = () => {
         if (menuStatus.aberto) {
             fecharMenu({setMenuStatus: setMenuStatus})
@@ -50,7 +46,7 @@ export default function Navbar(): React.JSX.Element {
                     </div>
                     <nav className="navbar-container">
                         <NavlinkBotao path='/' texto='Home' icone='mynaui:home' status={menuStatus} seta={false} />
-                        <NavlinkBotao path='/meu-espaco' texto='Meu Espaço' icone='mynaui:map-pin-house-inside' status={menuStatus} seta={false} />
+                        <NavlinkBotao path='/meus-espacos' texto='Meu Espaço' icone='mynaui:map-pin-house-inside' status={menuStatus} seta={false} />
                         <NavlinkBotao path='/s' texto='Serviços' icone='mynaui:list-check' status={menuStatus} seta={false} />
                         <NavlinkBotao path='/o' texto='Orçamentos' icone='mynaui:file-text' status={menuStatus} seta={false} />
                         <NavlinkBotao path='/e' texto='Eventos' icone='mynaui:calendar' status={menuStatus} seta={false} />

@@ -7,11 +7,9 @@ export const getUserEspacos = async (): Promise<Espaco[]> => {
     try {
         const response = await fetch(`http://localhost:3000/espacos/user/${userId}`)
         const data = await response.json()
-        console.log("Sucesso", data);
         
         espacos = data
     } catch (e) {
-        console.log("Deu erro");
         console.error(e)
     }
 
