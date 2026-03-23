@@ -27,7 +27,45 @@ router.post('/', async (req, res) => {
         },
     })
     res.json(novoRelacionamento)
+})
 
+// rota que apaga todos os registro de relacionamento de espaço e infraestrutura de acordo com id do espaço
+router.delete('/espaco/:espacoId', async (req, res) => {
+    //req.params   | parâmetros da URL
+    //req.body     | dados enviados no corpo
+    //req.query    | query string da URL
+
+    const espacoId = Number(req.params.espacoId)
+
+    if (!espacoId) {
+        return res.status(400).json({ error: 'IDs inválidos' })
+    }
+
+    const result = await prisma.espacoInfra.deleteMany({
+        where: { espaco_id: espacoId }
+    })
+
+    res.json(result)
+})
+
+// rota que apaga um registro de relacionamento de espaço e infraestrutura
+router.delete('/:infraId/:espacoId', async (req, res) => {
+    //req.params   | parâmetros da URL
+    //req.body     | dados enviados no corpo
+    //req.query    | query string da URL
+
+    const infraId = Number(req.params.infraId)
+    const espacoId = Number(req.params.espacoId)
+
+    if (!espacoId || !infraId) {
+        return res.status(400).json({ error: 'IDs inválidos' })
+    }
+
+    const result = await prisma.espacoInfra.deleteMany({
+        where: { espaco_id: espacoId, infra_id: infraId }
+    })
+
+    res.json(result)
 })
 
 module.exports = router

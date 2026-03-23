@@ -1,11 +1,13 @@
 export const cadastrarInfraestruturas = async (espacoID: number, infraID: number): Promise<boolean> => {
     let status: boolean = false
+    const token = sessionStorage.getItem('token')
 
     try {
         const response = await fetch('http://localhost:3000/rel_espaco_infra', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
                 espaco_id: espacoID,

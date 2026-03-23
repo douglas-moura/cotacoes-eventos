@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { Endereco } from "../../../types/interface"
-import { estadosBrasil } from "../../../functions/estadosBrasil"
-import Input from "../../Input/Input"
-import validate from "../../../functions/validate"
+import { Endereco } from "../../types/interface"
+import { estadosBrasil } from "../../functions/estadosBrasil"
+import Input from "../Input/Input"
+import validate from "../../functions/validate"
 
 type Props = {
     enviarDados: (valor: Endereco) => void,

@@ -1,4 +1,4 @@
-import { EstilosMenu } from "../types/type"
+import { EstilosMenu } from "../types/interface"
 
 type Props = {
     setMenuStatus: React.Dispatch<React.SetStateAction<EstilosMenu>>

@@ -82,20 +82,22 @@ export default function MeuEspacosDetalhes({ menuStatus }: {menuStatus: boolean}
                             </div>
                             <div className='meu-espaco-detalhes-infras-container'>
                                 <h3>Infraestrutura</h3>
-                                <div className='meu-espaco-detalhes-infras-list'>
-                                    {espaco.infraestruturas ?
-                                        espaco.infraestruturas.map((item) => {
-                                            const infra = infraOpcoesGeral.find((i) => i.id === item.infra_id)
-                                            if (!infra) return null
-                                            return (
-                                                <span key={item.infra_id} className='meu-espaco-detalhes-infras-box'>
-                                                    <Icon icon={infra.icone ?? 'teste'} className='meu-espaco-detalhes-infras-icon' />
-                                                    <p className='meu-espaco-detalhes-infras-texto'>{infra?.titulo}</p>
-                                                </span>
-                                            )
-                                        })
-                                    : null}
-                                </div>
+                                {espaco.infraestruturas?.length ?
+                                    <div className='meu-espaco-detalhes-infras-list'>
+                                        {espaco.infraestruturas ?
+                                            espaco.infraestruturas.map((item) => {
+                                                const infra = infraOpcoesGeral.find((i) => i.id === item.infra_id)
+                                                if (!infra) return null
+                                                return (
+                                                    <span key={item.infra_id} className='meu-espaco-detalhes-infras-box'>
+                                                        <Icon icon={infra.icone ?? 'teste'} className='meu-espaco-detalhes-infras-icon' />
+                                                        <p className='meu-espaco-detalhes-infras-texto'>{infra?.titulo}</p>
+                                                    </span>
+                                                )
+                                            })
+                                        : null}
+                                    </div>
+                                : <p>Nenhum infraestrutura cadastrada...</p>}
                             </div>
                         </div>
                         <div>

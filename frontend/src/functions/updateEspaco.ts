@@ -1,9 +1,12 @@
-import { Espaco } from "../types/interface"
+import { Espaco, Infra } from "../types/interface"
+import { cadastrarInfraestruturas } from "./cadastrarInfraestruturas"
+import { deletarEspacoInfraestruturas } from "./deletarEspacoInfraestruturas"
 
 export const updateEspaco = async (espacoId: number, acao: string, novasInfos?: Espaco): Promise<boolean> => {
     let status: boolean = false
     const token = sessionStorage.getItem('token')
     let data: any = {}
+    let responseInfrasDel: any
 
     switch (acao) {
         case 'atualizar': 
@@ -72,7 +75,19 @@ export const updateEspaco = async (espacoId: number, acao: string, novasInfos?: 
                 body: JSON.stringify(data.endereco)
             })
             
-            if (responseCarac.ok && responseEndereco.ok) {
+            let errosInfras: number = 0
+
+            const responseDelInfras = await deletarEspacoInfraestruturas(espacoId)
+            errosInfras = await responseDelInfras ? errosInfras : errosInfras++
+
+            if (responseDelInfras) {
+                data.infraestruturas.map(async (item: Infra) => {
+                    const responseInfrasAdd = await cadastrarInfraestruturas(espacoId, item.infra_id)
+                    errosInfras = await responseInfrasAdd ? errosInfras : errosInfras++
+                })
+            }
+            
+            if (responseCarac.ok && responseEndereco.ok && errosInfras == 0) {
                 status = true
             }
         } catch (e) {    

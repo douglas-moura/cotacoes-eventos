@@ -7,9 +7,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getEspaco } from "../functions/getEspaco"
 import { updateEspaco } from "../functions/updateEspaco"
 import Botao from "../components/Botao/Botao"
-import CaracteristicasForm from "../components/EspacoForm/Forms/CaracteristicasForm"
-import EnderecoForm from "../components/EspacoForm/Forms/EnderecoForm"
-import InfraestruturaForm from "../components/EspacoForm/Forms/InfraestruturaForm"
+import CaracteristicasForm from "../components/FormsEspaco/CaracteristicasForm"
+import EnderecoForm from "../components/FormsEspaco/EnderecoForm"
+import InfraestruturaForm from "../components/FormsEspaco/InfraestruturaForm"
 import BoxConteudo from "../components//BoxConteudo/BoxConteudo"
 import validate from "../functions/validate"
 import IconeInfraestrutura from "../components/IconeInfraestrutura/IconeInfraestrutura"
@@ -56,7 +56,7 @@ export default function EspacoForm({ menuStatus }: {menuStatus: boolean}): React
         fetchData()
     }, [])
 
-    // efeito de transição de formulários ao mudar as variaveis styles
+    // efeitos de transição de formulários ao mudar as variaveis styles
     useEffect(() => {
         if (formCaracteristicasStyle.finalizado) {
             setFormCaracteristicasStyle({ ...formCaracteristicasStyle, estilo: '-translate-x-full' })
@@ -76,7 +76,7 @@ export default function EspacoForm({ menuStatus }: {menuStatus: boolean}): React
         }
     }, [formCaracteristicasStyle.finalizado, formEnderecoStyle.finalizado, formInfraestruturasStyle.finalizado])
 
-    // função para ativar a troca de formulário
+    // função para realizar a troca de formulário
     const avancarEtapa = () => {
         if (!formCaracteristicasStyle.finalizado) {
             if (

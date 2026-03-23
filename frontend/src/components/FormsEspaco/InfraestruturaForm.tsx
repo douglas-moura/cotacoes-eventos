@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { getInfraestruturas } from "../../../functions/getInfraestruturas"
-import { Infra } from "../../../types/interface"
-import Input from "../../Input/Input"
+import { getInfraestruturas } from "../../functions/getInfraestruturas"
+import { Infra } from "../../types/interface"
+import Input from "../Input/Input"
 
 type Props = {
     infosEdit: Infra[] | undefined,

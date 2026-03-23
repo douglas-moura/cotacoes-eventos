@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { EspacoCaracteristicasProps } from "../../../types/type"
-import Input from "../../Input/Input"
+import { EspacoCaracteristicasProps } from "../../types/type"
+import Input from "../Input/Input"
 
 type Props = {
     enviarDados: (valor: EspacoCaracteristicasProps) => void
