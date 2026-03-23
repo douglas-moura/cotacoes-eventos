@@ -40,6 +40,8 @@ router.get('/:id', async (req, res) => {
                     numero: true,
                     bairro: true,
                     cidade: true,
+                    complemento: true,
+                    referencia: true,
                     uf: true,
                     cep: true
                 }
@@ -110,8 +112,28 @@ router.post('/', authMiddleware, async (req, res) => {
     res.json(novoEspaco)
 })
 
-// rota para atualizar o espaco
+// rota para atualizar uma info do espaco
 router.patch("/:id", async (req, res) => {
+    //req.params   | parâmetros da URL
+    //req.body     | dados enviados no corpo
+    //req.query    | query string da URL
+
+    const espacoId = Number(req.params.id)
+
+    const espaco = await prisma.espaco.update({
+        where: { id: espacoId },
+        data: req.body
+    })
+
+    if (!espaco) {
+        return res.status(404).json({ error: "Espaço não encontrado"})
+    }
+
+    res.json(espaco)
+})
+
+// rota para atualizar todas as infos do espaco
+router.put("/:id", async (req, res) => {
     //req.params   | parâmetros da URL
     //req.body     | dados enviados no corpo
     //req.query    | query string da URL

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Endereco, Espaco, FormEventoEstado, Infra } from "../../types/interface"
-import { Icon } from "@iconify/react"
 import { EspacoCaracteristicasProps } from "../../types/type"
 import { getInfraestruturas } from "../../functions/getInfraestruturas"
 import { cadastrarEspaco } from "../../functions/cadastrarEspaco"
+import { useNavigate } from "react-router-dom"
 import Botao from "../Botao/Botao"
 import CaracteristicasForm from "./Forms/CaracteristicasForm"
 import EnderecoForm from "./Forms/EnderecoForm"
@@ -14,39 +14,23 @@ import IconeInfraestrutura from "../IconeInfraestrutura/IconeInfraestrutura"
 import './EspacoForm.css'
 
 type Props = {
+    espacoID?: number,
     enviarDados: (valor: boolean) => void
 }
 
 export default function EspacoForm({ enviarDados }: Props): React.JSX.Element {
+    const navigate = useNavigate()
     const [formCaract, setFormCaract] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-0"})
     const [formEndereco, setFormEndereco] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [formInfra, setFormInfra] = useState<FormEventoEstado>({finalizado: false, estilo: "translate-x-full"})
     const [infraOpcoesGeral, setInfraOpcoesGeral] = useState<Infra[]>([])
     const [espaco, setEspaco] = useState<Espaco>({
-        id: 0,
-        nome: '',
-        descricao: '',
-        
-        area: 0,
-        capacidade: 0,
-        ambientes: 0,
-        quantidadeBanheiros: 0,
-
-        endereco: {
-            rua: '',
-            numero: '',
-            bairro: '',
-            cidade: '',
-            uf: '',
-            cep: '',
-        },
-
+        id: 0, nome: '', descricao: '',
+        area: 0, capacidade: 0, ambientes: 0, quantidadeBanheiros: 0,
+        endereco: { rua: '', numero: '', bairro: '', cidade: '', uf: '', cep: '', },
         infraestruturas: [],
-
         proprietarioID: 0,
-
-        ativo: true,
-        visivel: true
+        ativo: true, visivel: true
     })
 
     // efeito de transição de formulários
@@ -63,7 +47,9 @@ export default function EspacoForm({ enviarDados }: Props): React.JSX.Element {
             setTimeout(() => setFormEndereco({ ...formEndereco, estilo: '!hidden' }), 200);
         }
 
-        if (formInfra.finalizado) {}
+        if (formInfra.finalizado) {
+            navigate('/meus-espacos')
+        }
     }, [formCaract.finalizado, formEndereco.finalizado, formInfra.finalizado])
 
     useEffect(() => {

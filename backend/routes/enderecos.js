@@ -55,4 +55,24 @@ router.post('/', authMiddleware, async (req, res) => {
     res.json(novoEndereco)
 })
 
+// rota que atualiza o endereco de acordo com id do espaco
+router.patch('/:espacoId', async (req, res) => {
+    //req.params   | parâmetros da URL
+    //req.body     | dados enviados no corpo
+    //req.query    | query string da URL
+
+    const espacoId = Number(req.params.espacoId)
+
+    const endereco = await prisma.endereco.update({
+        where: { espaco_id: espacoId },
+        data: req.body
+    })
+
+    if (!endereco) {
+        return res.status(404).json({ error: "Endereco não encontrado"})
+    }
+
+    res.json(endereco)
+})
+
 module.exports = router

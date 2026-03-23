@@ -21,6 +21,7 @@ import About from "../pages/About"
 
 
 import MeuEspacosDetalhes from "../pages/MeuEspacoDetalhes"
+import EspacoForm from "../pages/EspacoForm"
 
 export default function App() {
     const context = useContext(Context)
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="/reset" element={<ResetarSenha />} />
 
                 <Route path="/meu-espaco/:id" element={<MeuEspacosDetalhes menuStatus={menuLateralStatus} />} />
+                <Route path="/meu-espaco-edit/:id" element={<EspacoForm menuStatus={menuLateralStatus} />} />
             </Routes>
         </BrowserRouter>
     )

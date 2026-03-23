@@ -7,6 +7,7 @@ export type InputProps = {
     opcoes?: string[],
     value?: string | number,
     status?: boolean,
+    check?: boolean,
     className?: string,
     onChange?: (value: string) => void
 }

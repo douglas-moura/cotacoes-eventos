@@ -5,11 +5,21 @@ import Input from "../../Input/Input"
 import validate from "../../../functions/validate"
 
 type Props = {
-    statusForm: boolean
-    enviarDados: (valor: Endereco) => void
+    enviarDados: (valor: Endereco) => void,
+    statusForm: boolean,
+    infosEdit: {
+        rua: string,
+        numero: string,
+        complemento: string | undefined,
+        referencia: string | undefined,
+        bairro: string,
+        cidade: string,
+        uf: string,
+        cep: string,
+    }
 }
 
-export default function EnderecoForm({ statusForm, enviarDados }: Props): React.JSX.Element {
+export default function EnderecoForm({ statusForm, infosEdit, enviarDados }: Props): React.JSX.Element {
     const [cepValido, setCepValido] = useState<boolean>(false)
     const [endereco, setEndereco] = useState<Endereco>({
         status: statusForm,
@@ -22,8 +32,10 @@ export default function EnderecoForm({ statusForm, enviarDados }: Props): React.
         uf: '',
         cep: '',
     })
-        
-    useEffect(() => mandarDadosCompPai(), [endereco])
+    
+    useEffect(() => {
+        enviarDados(endereco)
+    }, [endereco])
     
     useEffect(() => {
         setEndereco(prev => ({
@@ -33,8 +45,17 @@ export default function EnderecoForm({ statusForm, enviarDados }: Props): React.
 
         setCepValido(validate({ tipo: 'cep', valor: endereco.cep }))
     }, [statusForm, endereco.cep])
-
-    const mandarDadosCompPai = () => enviarDados(endereco)
+    
+    useEffect(() => {
+        if (infosEdit) {
+            console.log(infosEdit);
+            
+            setEndereco(prev => ({
+                ...prev,
+                ...infosEdit
+            }))
+        }
+    }, [JSON.stringify(infosEdit)])
 
     return (
         <>

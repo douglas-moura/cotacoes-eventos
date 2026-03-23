@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Icon } from '@iconify/react'
 import { InputProps } from '../../types/type'
-import './Input.css'
 import ToggleInput from './ToggleInput'
+import './Input.css'
 
-export default function Input({inputType, inputLabel, placeholder, opcoes, value, status, className = "", onChange}: InputProps): React.JSX.Element {
+export default function Input({inputType, inputLabel, placeholder, opcoes, value, status, check, className = "", onChange}: InputProps): React.JSX.Element {
     const [verSenha, setVerSenha] = useState<boolean>(false)
-    const [isChecked, setIsChecked] = useState<boolean>(false);
+    const [isChecked, setIsChecked] = useState<boolean>(false)    
 
     const handleCheckboxChange = (event: any) => {
         setIsChecked(event.target.checked)
@@ -106,14 +106,14 @@ export default function Input({inputType, inputLabel, placeholder, opcoes, value
                             className={['input-toggle-icon', isChecked ? 'input-toggle-ativo' : ''].join(' ')}
                         />
                         */}
-                        <ToggleInput check={isChecked} />
+                        <ToggleInput check={!!check} />
                         <p className=''>{inputLabel}</p>
                     </label>
                     <input
                         id={`checkbox-${inputLabel}`}
                         type="checkbox" 
                         className={`input-default ${status === false ? 'input-alert' : ''}`}
-                        checked={isChecked}
+                        checked={!!check}
                         onChange={handleCheckboxChange}
                     />
                 </span>

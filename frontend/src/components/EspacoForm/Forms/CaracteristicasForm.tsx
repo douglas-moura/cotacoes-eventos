@@ -3,18 +3,19 @@ import { EspacoCaracteristicasProps } from "../../../types/type"
 import Input from "../../Input/Input"
 
 type Props = {
-    statusForm: boolean
     enviarDados: (valor: EspacoCaracteristicasProps) => void
+    statusForm: boolean,
+    infosEdit: {
+        nome: string,
+        descricao: string,
+        area: number,
+        capacidade: number,
+        ambientes: number,
+        banheiros: number
+    },
 }
 
-export default function CaracteristicasForm({ statusForm, enviarDados }: Props): React.JSX.Element {
-    const [statusNome, setStatusNome] = useState<boolean>()
-    const [statusDescr, setStatusDescr] = useState<boolean>()
-    const [statusArea, setStatusArea] = useState<boolean>()
-    const [statusCapacidade, setStatusCapacidade] = useState<boolean>()
-    const [statusAmbient, setStatusAmbient] = useState<boolean>()
-    const [statusBanh, setStatusBanh] = useState<boolean>()
-
+export default function CaracteristicasForm({ infosEdit, statusForm, enviarDados }: Props): React.JSX.Element {
     const [caracteristicas, setCaracteristicas] = useState<EspacoCaracteristicasProps>({
         status: statusForm,
         nome: '',
@@ -25,16 +26,27 @@ export default function CaracteristicasForm({ statusForm, enviarDados }: Props):
         banheiros: 0
     })
     
-    useEffect(() => mandarDadosCompPai(), [caracteristicas])
+    useEffect(() => {
+        enviarDados(caracteristicas)
+    }, [caracteristicas])
 
     useEffect(() => {
         setCaracteristicas(prev => ({
             ...prev,
             status: statusForm
         }))
-    }, [statusForm])
 
-    const mandarDadosCompPai = () => enviarDados(caracteristicas)
+        setCaracteristicas({ ...caracteristicas, nome: caracteristicas.nome.toUpperCase()})
+    }, [statusForm, caracteristicas.nome])
+
+    useEffect(() => {
+        if (infosEdit && infosEdit.nome.length > 0) {
+            setCaracteristicas(prev => ({
+                ...prev,
+                ...infosEdit
+            }))
+        }
+    }, [JSON.stringify(infosEdit)])
 
     return (
         <>
@@ -45,7 +57,7 @@ export default function CaracteristicasForm({ statusForm, enviarDados }: Props):
                     className="col-span-2"
                     value={caracteristicas.nome}
                     status={!(caracteristicas.nome.length == 0 && !caracteristicas.status)}
-                    onChange={(value) => setCaracteristicas({ ...caracteristicas, nome: value })}
+                    onChange={(value) => setCaracteristicas(prev => ({ ...prev, nome: value }))}
                 />
                 <span className="col-span-2 mb-4">
                     <Input
@@ -53,7 +65,7 @@ export default function CaracteristicasForm({ statusForm, enviarDados }: Props):
                         inputLabel="Descrição"
                         value={caracteristicas.descricao}
                         status={!(caracteristicas.descricao.length == 0 && !caracteristicas.status)}
-                        onChange={(value) => setCaracteristicas({ ...caracteristicas, descricao: value })}
+                        onChange={(value) => setCaracteristicas(prev => ({ ...prev, descricao: value }))}
                     />
                     <p className='text-[.5rem] w-full text-left -mt-2'>{500 - caracteristicas.descricao.length} caracteres</p>
                 </span>
@@ -62,28 +74,28 @@ export default function CaracteristicasForm({ statusForm, enviarDados }: Props):
                     inputLabel="Área (m²)"
                     value={caracteristicas.area}
                     status={!(caracteristicas.area == 0 && !caracteristicas.status)}
-                    onChange={(value) => setCaracteristicas({ ...caracteristicas, area: parseInt(value) })}
+                    onChange={(value) => setCaracteristicas(prev => ({ ...prev, area: parseInt(value) }))}
                 />
                 <Input
                     inputType="number"
                     inputLabel="Capacidade (pessoas)"
                     value={caracteristicas.capacidade}
                     status={!(caracteristicas.capacidade == 0 && !caracteristicas.status)}
-                    onChange={(value) => setCaracteristicas({ ...caracteristicas, capacidade: parseInt(value) })}
+                    onChange={(value) => setCaracteristicas(prev => ({ ...prev, capacidade: parseInt(value) }))}
                 />
                 <Input
                     inputType="number"
                     inputLabel="Qtd. Ambientes"
                     value={caracteristicas.ambientes}
                     status={!(caracteristicas.ambientes == 0 && !caracteristicas.status)}
-                    onChange={(value) => setCaracteristicas({ ...caracteristicas, ambientes: parseInt(value) })}
+                    onChange={(value) => setCaracteristicas(prev => ({ ...prev, ambientes: parseInt(value) }))}
                 />
                 <Input
                     inputType="number"
                     inputLabel="Qtd. Banheiros"
                     value={caracteristicas.banheiros}
                     status={!(caracteristicas.banheiros == 0 && !caracteristicas.status)}
-                    onChange={(value) => setCaracteristicas({ ...caracteristicas, banheiros: parseInt(value) })}
+                    onChange={(value) => setCaracteristicas(prev => ({ ...prev, banheiros: parseInt(value) }))}
                 />
             </div>
         </>

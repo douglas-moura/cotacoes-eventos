@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { Icon } from "@iconify/react"
 import { Espaco } from "../../types/interface"
 import { updateEspaco } from "../../functions/updateEspaco"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Context } from "../../context/AppContext"
 import './BoxEspacoResumo.css'
 
@@ -15,6 +15,8 @@ export default function BoxEspacoResumo({ espaco }: {espaco: Espaco}): React.JSX
     if (!context) return <></>
     const { reloadApp } = context
 
+    const navigate = useNavigate()
+
     return (
         <span className={`box-espaco-resumo group ${boxResumoStyle} ${ativo ? (visivel ? '' : 'opacity-50 saturate-0 bg-neutral-200') : '!hidden'}`}>
             <div className='w-2/10 box-espaco-resumo-img'>
@@ -25,7 +27,9 @@ export default function BoxEspacoResumo({ espaco }: {espaco: Espaco}): React.JSX
                 <p className="box-espaco-resumo-descricao">{espaco.descricao.length > 200 ? espaco.descricao.slice(0, 200) + "..." : espaco.descricao}</p>
             </div>
             <span className="box-espaco-resumo-tools group-hover:!flex">
-                <Icon className='tool-icone' icon="mynaui:edit-one" />
+                <Icon className='tool-icone' icon="mynaui:edit-one" onClick={() => {
+                    navigate(`/meu-espaco-edit/${espaco.id}`)
+                }} />
                 <Icon className='tool-icone text-red-600' icon="mynaui:trash" onClick={() => {
                     updateEspaco(espaco.id, "apagar")
                     setBoxResumoStyle('scale-75')

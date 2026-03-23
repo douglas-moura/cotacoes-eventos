@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+.espaco-form-container {
+    @apply h-[450px] relative overflow-hidden scale-100;
+}
+
+.espaco-form-container>span {
+    @apply transition-all duration-300 absolute w-full;
+}
+
+.espaco-form-subform {
+    @apply grid gap-x-4 scale-98 mt-4;
+}
+
+.espaco-form-resumo-infra {
+    @apply mb-4 border border-neutral-200 rounded p-4;
+}
+
+.espaco-form-resumo-caract {
+    @apply grid grid-cols-4 mb-4 border border-neutral-200 rounded p-4;
+}
+
+.espaco-form-resumo-caract strong {
+    @apply text-[.65rem];
+}
+
+.espaco-form-resumo-caract p {
+    @apply text-neutral-400;
+}
+
+.espaco-form-resumo-endereco {
+    @apply mb-4 border border-neutral-200 p-4 rounded;
+}
+
+.espaco-form-resumo-endereco p {
+    @apply text-xs leading-5;
+}
