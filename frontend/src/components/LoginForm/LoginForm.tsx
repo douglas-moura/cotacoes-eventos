@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate  } from 'react-router'
 import { registrarAcesso } from '../../functions/registrarAcesso'
+import { jwtDecode } from 'jwt-decode'
+import { UserLogado } from '../../types/interface'
+import { Context } from '../../context/AppContext'
 import BoxMensagem from '../BoxMensagem/BoxMensagem'
 import Input from '../Input/Input'
 import Botao from '../Botao/Botao'
@@ -14,6 +17,10 @@ export default function LoginForm(): React.JSX.Element {
     const [msgBox, setMsgBox] = useState<string[]>(['', ''])
     // navigate do router
     let navigate = useNavigate()
+
+    const context = useContext(Context)
+    if (!context) return <></>
+    const { setUser } = context
 
     const logar = async (): Promise<void> => {
         if (email.length > 0 || senha.length > 0) {
@@ -31,11 +38,17 @@ export default function LoginForm(): React.JSX.Element {
                     const data = await response.json()
                     sessionStorage.setItem("token", data.token)
 
+                    const decoded = jwtDecode<UserLogado>(data.token)
+                    setUser(decoded)
+
+                    console.log("DECODE LOGIN", decoded)
+                    
+
                     setTimeout(() => {
                         registrarAcesso(data.userId)
                         //setEmail('')
                         //setSenha('')
-                        navigate('/')
+                        navigate('/home')
                     }, 1000)
                 } else {
                     setMsgBox(['erro', 'E-mail ou senha incorretos'])

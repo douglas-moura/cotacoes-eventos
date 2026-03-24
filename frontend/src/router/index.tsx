@@ -17,11 +17,13 @@ import ResetarSenha from "../pages/ResetarSenha"
 
 import Home from "../pages/Home"
 import MeusEspacos from "../pages/MeusEspacos"
+import Servicos from "../pages/Servicos"
 import About from "../pages/About"
 
 
 import MeuEspacosDetalhes from "../pages/MeuEspacoDetalhes"
 import EspacoForm from "../pages/EspacoForm"
+import Default from "../pages/Default"
 
 export default function App() {
     const context = useContext(Context)
@@ -33,8 +35,10 @@ export default function App() {
             <Navbar />
             {/*<Topbar menuStatus={menuLateralStatus} />*/}
             <Routes>
-                <Route path="/" element={<Home menuStatus={menuLateralStatus} />} />
+                <Route path="/" element={<Default />} />
+                <Route path="/home" element={<Home menuStatus={menuLateralStatus} />} />
                 <Route path="/meus-espacos" element={<MeusEspacos menuStatus={menuLateralStatus} />} />
+                <Route path="/servicos" element={<Servicos menuStatus={menuLateralStatus} />} />
                 <Route path="/about" element={<About menuStatus={menuLateralStatus} />} />
 
                 <Route path="/login" element={<Login />} />
