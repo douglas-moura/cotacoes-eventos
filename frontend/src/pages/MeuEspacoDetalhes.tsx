@@ -8,7 +8,6 @@ import { Espaco, Infra } from '../types/interface'
 import { getInfraestruturas } from '../functions/getInfraestruturas'
 import BoxConteudo from "../components/BoxConteudo/BoxConteudo"
 import './MeuEspacoDetalhes.css'
-import Botao from '../components/Botao/Botao'
 
 export default function MeuEspacosDetalhes({ menuStatus }: {menuStatus: boolean}): React.JSX.Element {
     // validação do token de login
@@ -44,13 +43,21 @@ export default function MeuEspacosDetalhes({ menuStatus }: {menuStatus: boolean}
             <section>
                 <div className="container">
                     <Link to="/meus-espacos" className='mb-4 text-[var(--color-primaria-escuro)]'>
-                        <span className='!flex-row items-center'>
+                        <span className='flex-row items-center'>
                             <Icon icon="mynaui:arrow-left" className='mr-2 text-xl font-extrabold' />
                             <h4 className='!m-0 text-base'>Voltar</h4>
                         </span>
                     </Link>
                 </div>
                 <BoxConteudo className=''>
+                    <div className='container mb-5'>
+                        <span className='mb-4 text-[var(--color-primaria-escuro)] flex-row justify-center items-center border w-2/12 p-2 rounded-full' onClick={() => {
+                            navigate(`/meu-espaco-edit/${espacoId}`)
+                        }}>
+                            <Icon icon="mynaui:edit-one" className='mr-2 text-2xl font-extrabold' />
+                            <h4 className='!m-0 text-xl'>Editar</h4>
+                        </span>
+                    </div>
                     <div className="container grid-cols-2 relative">
                         <div className='coluna'>
                             <h1>{espaco.nome}</h1>

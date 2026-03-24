@@ -165,7 +165,7 @@ export default function EspacoForm({ menuStatus }: {menuStatus: boolean}): React
                             e.preventDefault()
                         }}>
                             <span className="espaco-form-container">
-                                <span className={["", formCaracteristicasStyle?.estilo].join(' ')}>
+                                <span className={["w-full", formCaracteristicasStyle?.estilo].join(' ')}>
                                     <CaracteristicasForm
                                         infosEdit={{
                                             nome: editEspaco.nome,
@@ -202,7 +202,7 @@ export default function EspacoForm({ menuStatus }: {menuStatus: boolean}): React
                                     />
                                 </span>
                             </span>
-                            <span className="!flex-row w-full justify-between mt-4">
+                            <span className="flex-row w-full justify-between mt-4">
                                 <span className="w-1/4">
                                     <Botao
                                         tipo="cancel"

@@ -36,7 +36,7 @@ export default function CaracteristicasForm({ infosEdit, statusForm, enviarDados
             status: statusForm
         }))
 
-        setCaracteristicas({ ...caracteristicas, nome: caracteristicas.nome.toUpperCase()})
+        setCaracteristicas({ ...caracteristicas, nome: caracteristicas.nome})
     }, [statusForm, caracteristicas.nome])
 
     useEffect(() => {
@@ -59,7 +59,7 @@ export default function CaracteristicasForm({ infosEdit, statusForm, enviarDados
                     status={!(caracteristicas.nome.length == 0 && !caracteristicas.status)}
                     onChange={(value) => setCaracteristicas(prev => ({ ...prev, nome: value }))}
                 />
-                <span className="col-span-2 mb-4">
+                <span className="col-span-2 mb-4 flex-col">
                     <Input
                         inputType="text-longo"
                         inputLabel="Descrição"

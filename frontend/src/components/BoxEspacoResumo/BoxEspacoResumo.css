@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .box-espaco-resumo {
-    @apply !flex-row transition-all duration-200 ease-out justify-between cursor-pointer relative p-4 rounded border border-neutral-200;
+    @apply flex-row transition-all duration-200 ease-out justify-between cursor-pointer relative p-4 rounded border border-neutral-200;
 }
 
 .box-espaco-resumo-img {
@@ -17,7 +17,7 @@
 }
 
 .box-espaco-resumo-tools {
-    @apply !flex-row justify-end !hidden items-center mt-6 absolute right-4 bottom-4
+    @apply flex-row justify-end !hidden items-center mt-6 absolute right-4 bottom-4
 }
 
 .box-espaco-resumo-tools .tool-icone {
@@ -25,7 +25,7 @@
 }
 
 .box-espaco-resumo-nota {
-    @apply !flex-row items-center absolute right-4 top-4
+    @apply flex-row items-center absolute right-4 top-4
 }
 
 .box-espaco-resumo-nota ul li {

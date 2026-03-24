@@ -9,7 +9,7 @@
 }
 
 .topbar-icone-container {
-    @apply !flex-row items-center p-[.5rem] hover:bg-[var(--color-primaria-light)] rounded-full cursor-pointer;
+    @apply flex-row items-center p-[.5rem] hover:bg-[var(--color-primaria-light)] rounded-full cursor-pointer;
 }
 
 .topbar-icone {}

@@ -5,7 +5,7 @@
 }
 
 .meu-espaco-detalhes-estrutura-box {
-    @apply bg-neutral-200 p-6 rounded
+    @apply flex-col bg-neutral-200 p-6 rounded
 }
 
 .meu-espaco-detalhes-estrutura-titulo {
@@ -27,7 +27,7 @@
 }
 
 .meu-espaco-detalhes-infras-box {
-    @apply items-center text-center
+    @apply flex-col items-center text-center
 }
 
 .meu-espaco-detalhes-infras-icon {

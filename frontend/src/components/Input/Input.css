@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .input-container {
-  @apply mb-4 relative;
+  @apply mb-4 relative flex-col;
 }
 
 .input-container label {
