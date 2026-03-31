@@ -12,7 +12,8 @@ const loginRoutes = require('./routes/login')
 const espacosRoutes = require('./routes/espacos')
 const enderecosRoutes = require('./routes/enderecos')
 const infraestruturasRoutes = require('./routes/infraestruturas')
-const relEspacoInfraestrutura = require('./routes/relacEspacoInfraestrutura')
+const relEspacoInfraestruturaRoutes = require('./routes/relacEspacoInfraestrutura')
+const servicosRoutes = require('./routes/servicos')
 
 const app = express()
 
@@ -32,7 +33,8 @@ app.use('/login', loginRoutes)
 app.use('/espacos', espacosRoutes)
 app.use('/enderecos', enderecosRoutes)
 app.use('/infraestruturas', infraestruturasRoutes)
-app.use('/rel_espaco_infra', relEspacoInfraestrutura)
+app.use('/rel_espaco_infra', relEspacoInfraestruturaRoutes)
+app.use('/servicos', servicosRoutes)
 
 // rotas - definem os endpoints da API, ou seja, as URLs que o frontend pode acessar para obter ou enviar dados
 app.get('/', (req, res) => {

@@ -42,17 +42,17 @@ router.post('/', async (req, res) => {
         // PAYLOAD
         // não coloque senha
         // não coloque dados sensíveis
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, nome: user.nome },
         // "ASSINATURA"
         "segredo_super_secreto",
         // VALIDADE DO TOKEN
         // { expiresIn: "15m" }  // 15 minutos
         // { expiresIn: "1d" }   // 1 dia
         // { expiresIn: "7d" }   // 7 dias
-        { expiresIn: "2h" }     // 2 horas
+        { expiresIn: "1d" }     // 2 horas
     )
 
-    res.json({token: token, userId: user.id, userEmail: user.email})
+    res.json({token: token, userId: user.id, userEmail: user.email, userNome: user.nome})
 })
 
 module.exports = router

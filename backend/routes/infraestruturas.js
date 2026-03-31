@@ -53,3 +53,28 @@ router.get('/:id', async (req, res) => {
 })
 
 module.exports = router
+
+/*
+INSERT INTO infraestruturas (titulo, icone) VALUES
+('Elevador', 'tabler:elevator'),
+('Acessibilidade', 'tabler:disabled'),
+('Wi-Fi', 'tabler:wifi'),
+('Estacionamento', 'tabler:car'),
+('Ar-condicionado', 'tabler:air-conditioning'),
+('Espaço kids', 'tabler:mood-kid'),
+('Varanda', 'tabler:photo-circle'),
+('Jardim', 'tabler:plant'),
+('Salas de Escritório', 'tabler:users-group'),
+('Área coberta', 'tabler:sun-off'),
+('Área externa', 'tabler:sun'),
+('Telão e Projetor', 'tabler:screen-share'),
+('Portaria / recepção', 'tabler:door-enter'),
+('Depósito / almoxarifado', 'tabler:package'),
+('Cozinha equipada', 'tabler:cooker'),
+('Espaço pet friendly', 'tabler:paw'),
+('Área instagramável', 'tabler:brand-instagram'),
+('Piscina', 'tabler:pool'),
+('Churrasqueira', 'tabler:grill'),
+('Serviço de buffet', 'tabler:chef-hat'),
+('Sistema de som básico', 'tabler:music');
+*/
